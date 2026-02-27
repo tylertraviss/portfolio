@@ -36,8 +36,8 @@ const AboutSection = () => {
         </h2>
 
         <div className="grid gap-12 md:grid-cols-[3fr_2fr]">
-          <div className="space-y-5 text-muted-foreground leading-relaxed">
-            <div className="mb-6 flex justify-center md:justify-start">
+          <div className="space-y-5 text-muted-foreground leading-relaxed flex flex-col items-center text-center md:items-start md:text-left">
+            <div className="mb-6 flex justify-center">
               <img
                 src={tylerPhoto}
                 alt="Tyler Travis"

@@ -31,33 +31,31 @@ const AboutSection = () => {
         className="mx-auto max-w-5xl"
       >
         <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-primary">About</p>
-        <h2 className="mb-12 font-display text-3xl text-foreground md:text-4xl">
+        {/* <h2 className="mb-12 font-display text-3xl text-foreground md:text-4xl">
           A bit about me
-        </h2>
+        </h2> */}
 
         <div className="grid gap-12 md:grid-cols-[3fr_2fr]">
           <div className="space-y-5 text-muted-foreground leading-relaxed flex flex-col items-center text-center md:items-start md:text-left">
             <div className="mb-6 flex justify-center">
-              <img
+              {/* <img
                 src={tylerPhoto}
                 alt="Tyler Travis"
                 className="h-40 w-40 rounded-2xl object-cover shadow-md border border-border"
-              />
+              /> */}
             </div>
-            <p>
-              I'm a software engineer with a passion for building reliable, scalable systems.
-              I've worked across fintech, healthcare, and gaming — from automated testing frameworks
-              at QA Consultants to machine learning models at Breathe Biomedical.
-            </p>
-            <p>
-              Currently, I'm a Software Product Manager at Fintex Inc., guiding discovery and delivery
-              across three regulated financial platforms serving 2M+ daily users including Tangerine,
-              BMO, and Aviso.
-            </p>
-            <p>
-              I hold a B.Sc. in Software Engineering from the University of New Brunswick.
-              Outside of tech, I've acted in CBC's Macy Murdoch, coached youth soccer, and organized the inaugural Microsoft AI Day.
-            </p>
+
+<p>
+  I'm a software engineer with a passion for building reliable, scalable systems that don’t just work — they hold up under pressure. I care deeply about quality, performance, and creating software that teams can confidently ship. Over the past few years, I’ve worked across fintech, healthcare, and gaming — from designing automated testing frameworks at QA Consultants to developing machine learning models at Breathe Biomedical.
+</p>
+
+<p>
+  Currently, I'm a Software Product Manager at Fintex Inc., where I guide discovery, system definition, and delivery across three regulated financial platforms serving 2M+ daily users, including Tangerine, BMO, and Aviso. I bridge the gap between business and engineering — translating ambiguity into clear requirements, aligning stakeholders, and ensuring what gets built is scalable, compliant, and resilient.
+</p>
+
+<p>
+  I hold a B.Sc. in Software Engineering from the University of New Brunswick. Outside of tech, I’m equally driven — I’ve acted in CBC’s Macy Murdoch, coached youth soccer for over 1,000 hours, and helped organize the inaugural Microsoft AI Day. Whether it’s software, sport, or storytelling, I’m drawn to building things that make an impact.
+</p>
           </div>
 
           <div className="space-y-6">

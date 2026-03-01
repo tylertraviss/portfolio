@@ -1,73 +1,42 @@
-# Welcome to your Lovable project
+# Tyler Travis Portfolio
 
-## Project info
+Modern single-page portfolio built with Vite, React, TypeScript, Tailwind CSS, and shadcn/ui. It highlights experience, projects, and contact info with smooth animations powered by Framer Motion.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Getting Started
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+pnpm install  # or npm install / bun install
+pnpm dev      # start Vite dev server on http://localhost:5173
 ```
 
-**Edit a file directly in GitHub**
+Useful scripts (`package.json`):
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- `dev` – run the development server.
+- `build` – create an optimized production bundle in `dist/`.
+- `preview` – serve the production bundle locally.
+- `lint`, `test`, `test:watch` – quality checks powered by ESLint and Vitest.
 
-**Use GitHub Codespaces**
+## Project Structure
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- `src/components` – UI sections such as Hero, About, Projects, and Contact.
+- `src/assets` – static images (e.g., `tyler-headshot.png`).
+- `public` – public assets copied as-is.
+- `vite.config.ts`, `tailwind.config.ts` – tooling configuration.
 
-## What technologies are used for this project?
+## Deployment
 
-This project is built with:
+The site is optimized for static hosting:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. Run `pnpm build`.
+2. Deploy the `dist/` folder to your host (Vercel, Netlify, Cloudflare Pages, etc.).
+3. When using Vercel, set the build command to `pnpm build` (or `npm run build`) and output directory to `dist`. Add custom domains in the project’s Domain settings and point your registrar’s DNS records to Vercel’s values.
 
-## How can I deploy this project?
+## Customization Tips
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+- Update content in the components under `src/components`.
+- Tailwind styles are defined via utility classes and the `tailwind.config.ts` theme.
+- For new icons, import from `lucide-react`. For new sections, follow the existing motion + Tailwind pattern.
 
-## Can I connect a custom domain to my Lovable project?
+## License
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+This codebase is private to Tyler Travis. Contact Tyler for reuse permissions.

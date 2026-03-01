@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
-    title: "Software Product Manager",
+    title: "Software Engineer",
     company: "Fintex Inc.",
     period: "Mar 2025 – Present",
     bullets: [

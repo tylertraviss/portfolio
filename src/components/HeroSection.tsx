@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import tylerHeadshot from "@/assets/tyler-headshot.png";
 
 const HeroSection = () => {
   return (
@@ -10,8 +11,9 @@ const HeroSection = () => {
         <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-accent/10 via-primary/10 to-transparent blur-3xl" />
       </div>
 
-      <div className="relative z-10 max-w-3xl">
-        <motion.div
+      <div className="relative z-10 grid w-full max-w-6xl gap-10 md:grid-cols-2 md:items-center">
+        <div>
+          <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -60,6 +62,23 @@ const HeroSection = () => {
           >
             Get In Touch
           </a>
+        </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6 }}
+          className="mx-auto flex items-center justify-center"
+        >
+          <div className="relative">
+            <div className="absolute -right-6 -top-6 hidden h-32 w-32 rounded-full bg-primary/15 blur-3xl md:block" />
+            <img
+              src={tylerHeadshot}
+              alt="Tyler Travis headshot"
+              className="relative z-10 h-64 w-64 rounded-[32px] object-cover shadow-2xl border border-border md:h-80 md:w-80"
+            />
+          </div>
         </motion.div>
       </div>
     </section>

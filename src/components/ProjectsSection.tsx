@@ -3,7 +3,7 @@ import { ArrowUpRight, Github, Youtube } from "lucide-react";
 
 const projects = [
   {
-    title: "LoyaltyTickets",
+    title: "LoyaltyTickets Startup",
     subtitle: "Concert Ticket Platform",
     description:
       "A concert ticket selling platform that uses Spotify API to reward biggest fans by giving them tickets first. Full-stack app with Go backend and Angular frontend, deployed on Railway.",

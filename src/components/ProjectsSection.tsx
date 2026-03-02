@@ -17,6 +17,7 @@ const projects = [
       "Automated testing suite for the Google Homepage, showcasing logging, reporting, CI integration, and Pytest best practices.",
     tags: ["Python", "Pytest", "CI", "Logging", "Reporting"],
     github: "https://github.com/tylertraviss/Regression-Framework-Example",
+    youtube: "https://youtu.be/gUGn0pKXp2A?si=-xLNQ0ovabM-_Oyb",
   },
   {
     title: "CodeCompass",
@@ -25,6 +26,7 @@ const projects = [
       "AI-powered LeetCode assistant providing real-time solutions and explanations. Built with Python and Flask.",
     tags: ["Python", "Flask", "AI", "OpenAI API"],
     github: "https://github.com/tylertraviss/CodeCompass",
+    youtube: "https://youtu.be/qfDysjISc-I?si=OJe0008Tts3yZ6qu"
   },
   {
     title: "Eye Disease Classification",

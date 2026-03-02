@@ -10,6 +10,14 @@ const projects = [
     tags: ["Go", "Angular", "Spotify API", "PostgreSQL", "Railway"],
   },
   {
+    title: "Regression Testing Framework",
+    subtitle: "Testing Suite",
+    description:
+      "Automated testing suite for the Google Homepage, showcasing logging, reporting, CI integration, and Pytest best practices.",
+    tags: ["Python", "Pytest", "CI", "Logging", "Reporting"],
+    github: "https://github.com/tylertraviss/Regression-Framework-Example",
+  },
+  {
     title: "CodeCompass",
     subtitle: "LeetCode AI Assistant",
     description:
@@ -33,14 +41,7 @@ const projects = [
     tags: ["Java", "Design Patterns", "OOP"],
     github: "https://github.com/tylertraviss/TalentAgencySystem",
   },
-  {
-    title: "Regression Testing Framework",
-    subtitle: "Testing Suite",
-    description:
-      "Automated testing suite for the Google Homepage, showcasing logging, reporting, CI integration, and Pytest best practices.",
-    tags: ["Python", "Pytest", "CI", "Logging", "Reporting"],
-    github: "https://github.com/tylertraviss/Regression-Framework-Example",
-  },
+
   {
     title: "Student Audit Tracking System",
     subtitle: "Degree Planning Tool",

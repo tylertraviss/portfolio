@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Github, Youtube } from "lucide-react";
 
 const projects = [
   {
@@ -8,6 +8,7 @@ const projects = [
     description:
       "A concert ticket selling platform that uses Spotify API to reward biggest fans by giving them tickets first. Full-stack app with Go backend and Angular frontend, deployed on Railway.",
     tags: ["Go", "Angular", "Spotify API", "PostgreSQL", "Railway"],
+    youtube: "https://youtu.be/SZpT_vyZsFw?si=XNlv3K6Zdf1GB5_C",
   },
   {
     title: "Regression Testing Framework",
@@ -16,6 +17,7 @@ const projects = [
       "Automated testing suite for the Google Homepage, showcasing logging, reporting, CI integration, and Pytest best practices.",
     tags: ["Python", "Pytest", "CI", "Logging", "Reporting"],
     github: "https://github.com/tylertraviss/Regression-Framework-Example",
+    youtube: "https://youtu.be/gUGn0pKXp2A?si=-xLNQ0ovabM-_Oyb",
   },
   {
     title: "CodeCompass",
@@ -24,6 +26,7 @@ const projects = [
       "AI-powered LeetCode assistant providing real-time solutions and explanations. Built with Python and Flask.",
     tags: ["Python", "Flask", "AI", "OpenAI API"],
     github: "https://github.com/tylertraviss/CodeCompass",
+    youtube: "https://youtu.be/qfDysjISc-I?si=OJe0008Tts3yZ6qu"
   },
   {
     title: "Eye Disease Classification",
@@ -81,11 +84,30 @@ const ProjectsSection = () => {
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <ArrowUpRight className="h-5 w-5" />
                 </span>
-                {p.github && (
-                  <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-foreground">
-                    <Github className="h-5 w-5" />
-                  </a>
-                )}
+                <span className="flex items-center gap-3 text-muted-foreground">
+                  {p.youtube && (
+                    <a
+                      href={p.youtube}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-foreground"
+                      aria-label={`${p.title} demo video`}
+                    >
+                      <Youtube className="h-5 w-5" />
+                    </a>
+                  )}
+                  {p.github && (
+                    <a
+                      href={p.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-foreground"
+                      aria-label={`${p.title} GitHub repository`}
+                    >
+                      <Github className="h-5 w-5" />
+                    </a>
+                  )}
+                </span>
               </div>
               <h3 className="mb-1 text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                 {p.title}

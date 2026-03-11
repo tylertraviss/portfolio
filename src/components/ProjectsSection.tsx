@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github, Youtube } from "lucide-react";
+import { ArrowUpRight, Github, Globe, Youtube } from "lucide-react";
 
 const projects = [
   {
@@ -8,6 +8,7 @@ const projects = [
     description:
       "A concert ticket selling platform that uses Spotify API to reward biggest fans by giving them tickets first. Full-stack app with Go backend and Angular frontend, deployed on Railway.",
     tags: ["Go", "Angular", "Spotify API", "PostgreSQL", "Railway"],
+    website: "https://loyaltytickets.ca/",
     youtube: "https://youtu.be/SZpT_vyZsFw?si=XNlv3K6Zdf1GB5_C",
   },
   {
@@ -85,6 +86,17 @@ const ProjectsSection = () => {
                   <ArrowUpRight className="h-5 w-5" />
                 </span>
                 <span className="flex items-center gap-3 text-muted-foreground">
+                  {p.website && (
+                    <a
+                      href={p.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-foreground"
+                      aria-label={`${p.title} website`}
+                    >
+                      <Globe className="h-5 w-5" />
+                    </a>
+                  )}
                   {p.youtube && (
                     <a
                       href={p.youtube}

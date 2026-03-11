@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { track } from "@vercel/analytics/react";
 import { Mail, Linkedin, Github, ArrowRight } from "lucide-react";
 
 const ContactSection = () => {
@@ -23,6 +24,7 @@ const ContactSection = () => {
         <a
           href="mailto:tylertravisrhs@gmail.com"
           className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-80"
+          onClick={() => track("contact_click", { type: "say_hello" })}
         >
           <Mail className="h-4 w-4" />
           Say Hello
@@ -33,6 +35,7 @@ const ContactSection = () => {
           <a
             href="mailto:tylertravisrhs@gmail.com"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+            onClick={() => track("contact_click", { type: "email_icon" })}
           >
             <Mail className="h-4 w-4" />
           </a>
@@ -41,6 +44,7 @@ const ContactSection = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+            onClick={() => track("contact_click", { type: "linkedin" })}
           >
             <Linkedin className="h-4 w-4" />
           </a>
@@ -49,6 +53,7 @@ const ContactSection = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+            onClick={() => track("contact_click", { type: "github" })}
           >
             <Github className="h-4 w-4" />
           </a>

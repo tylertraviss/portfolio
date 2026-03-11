@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { track } from "@vercel/analytics/react";
 import { ArrowUpRight, Github, Globe, Youtube } from "lucide-react";
 
 const projects = [
@@ -92,6 +93,7 @@ const ProjectsSection = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="transition-colors hover:text-foreground"
+                      onClick={() => track("project_website_click", { title: p.title })}
                       aria-label={`${p.title} website`}
                     >
                       <Globe className="h-5 w-5" />
@@ -103,6 +105,7 @@ const ProjectsSection = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="transition-colors hover:text-foreground"
+                      onClick={() => track("project_youtube_click", { title: p.title })}
                       aria-label={`${p.title} demo video`}
                     >
                       <Youtube className="h-5 w-5" />
@@ -114,6 +117,7 @@ const ProjectsSection = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="transition-colors hover:text-foreground"
+                      onClick={() => track("project_github_click", { title: p.title })}
                       aria-label={`${p.title} GitHub repository`}
                     >
                       <Github className="h-5 w-5" />

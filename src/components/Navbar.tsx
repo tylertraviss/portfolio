@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { track } from "@vercel/analytics/react";
 
 const links = [
   { label: "About", href: "#about" },
@@ -26,7 +27,11 @@ const Navbar = () => {
         scrolled ? "border-b border-border bg-background/90 backdrop-blur-md" : ""
       }`}
     >
-      <a href="#home" className="font-display text-xl text-foreground">
+      <a
+        href="#home"
+        className="font-display text-xl text-foreground"
+        onClick={() => track("nav_click", { label: "Home" })}
+      >
         Tyler Travis
       </a>
       <div className="hidden items-center gap-8 md:flex">
@@ -35,6 +40,7 @@ const Navbar = () => {
             key={l.href}
             href={l.href}
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            onClick={() => track("nav_click", { label: l.label })}
           >
             {l.label}
           </a>
@@ -42,6 +48,7 @@ const Navbar = () => {
         <a
           href="#contact"
           className="rounded-full bg-foreground px-5 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-80"
+          onClick={() => track("nav_click", { label: "Let's Talk" })}
         >
           Let's Talk
         </a>

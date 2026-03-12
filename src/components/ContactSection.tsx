@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { track } from "@vercel/analytics/react";
 import { Mail, Linkedin, Github, ArrowRight } from "lucide-react";
+import { logClientEvent } from "@/lib/utils";
 
 const ContactSection = () => {
   return (
@@ -24,7 +25,11 @@ const ContactSection = () => {
         <a
           href="mailto:tylertravisrhs@gmail.com"
           className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-80"
-          onClick={() => track("contact_click", { type: "say_hello" })}
+          onClick={() => {
+            const data = { type: "say_hello" };
+            track("contact_click", data);
+            logClientEvent("contact_click", data);
+          }}
         >
           <Mail className="h-4 w-4" />
           Say Hello
@@ -35,7 +40,11 @@ const ContactSection = () => {
           <a
             href="mailto:tylertravisrhs@gmail.com"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-            onClick={() => track("contact_click", { type: "email_icon" })}
+            onClick={() => {
+              const data = { type: "email_icon" };
+              track("contact_click", data);
+              logClientEvent("contact_click", data);
+            }}
           >
             <Mail className="h-4 w-4" />
           </a>
@@ -44,7 +53,11 @@ const ContactSection = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-            onClick={() => track("contact_click", { type: "linkedin" })}
+            onClick={() => {
+              const data = { type: "linkedin" };
+              track("contact_click", data);
+              logClientEvent("contact_click", data);
+            }}
           >
             <Linkedin className="h-4 w-4" />
           </a>
@@ -53,7 +66,11 @@ const ContactSection = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-            onClick={() => track("contact_click", { type: "github" })}
+            onClick={() => {
+              const data = { type: "github" };
+              track("contact_click", data);
+              logClientEvent("contact_click", data);
+            }}
           >
             <Github className="h-4 w-4" />
           </a>

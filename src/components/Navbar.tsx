@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { track } from "@vercel/analytics/react";
+import { logClientEvent } from "@/lib/utils";
 
 const links = [
   { label: "About", href: "#about" },
@@ -30,7 +31,11 @@ const Navbar = () => {
       <a
         href="#home"
         className="font-display text-xl text-foreground"
-        onClick={() => track("nav_click", { label: "Home" })}
+        onClick={() => {
+          const data = { label: "Home" };
+          track("nav_click", data);
+          logClientEvent("nav_click", data);
+        }}
       >
         Tyler Travis
       </a>
@@ -40,7 +45,11 @@ const Navbar = () => {
             key={l.href}
             href={l.href}
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            onClick={() => track("nav_click", { label: l.label })}
+            onClick={() => {
+              const data = { label: l.label };
+              track("nav_click", data);
+              logClientEvent("nav_click", data);
+            }}
           >
             {l.label}
           </a>
@@ -48,7 +57,11 @@ const Navbar = () => {
         <a
           href="#contact"
           className="rounded-full bg-foreground px-5 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-80"
-          onClick={() => track("nav_click", { label: "Let's Talk" })}
+          onClick={() => {
+            const data = { label: "Let's Talk" };
+            track("nav_click", data);
+            logClientEvent("nav_click", data);
+          }}
         >
           Let's Talk
         </a>

@@ -1,0 +1,61 @@
+name: Claude Issue to PR
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  implement:
+    # Only run when the label is exactly "ai-fix"
+    if: github.event.label.name == 'ai-fix'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write      # create branches + commit
+      pull-requests: write  # open PRs
+      issues: write         # post comments on the issue
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Claude implements the issue
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          timeout_minutes: 30
+          prompt: |
+            You are implementing GitHub issue #${{ github.event.issue.number }}.
+
+            Issue title: ${{ github.event.issue.title }}
+            Issue body:
+            ${{ github.event.issue.body }}
+
+            Stack: React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui (Radix UI), Vitest, ESLint.
+
+            Follow these steps exactly:
+            1. Read CLAUDE.md in the repo root for standards and context.
+            2. Understand the issue fully before touching any code.
+            3. Create a new branch named: fix/issue-${{ github.event.issue.number }}
+            4. Make only the changes needed to address the issue.
+            5. Run `npm test` (Vitest). Fix any failures before continuing.
+            6. Run `npm run lint` (ESLint). Fix any errors.
+            7. Run `npm run build` to confirm the TypeScript build passes.
+            8. Commit your changes with a clear message referencing the issue.
+            9. Open a pull request that:
+               - Has title: "fix: [brief description] (closes #${{ github.event.issue.number }})"
+               - Explains what you changed and why in the body
+               - Lists the tests that cover the change
+               - Closes the issue automatically
+
+            If the issue is unclear or too large to safely implement,
+            post a comment on the issue explaining what clarification is needed.
+            Do NOT guess at ambiguous requirements.

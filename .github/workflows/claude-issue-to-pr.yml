@@ -14,6 +14,7 @@ jobs:
       contents: write      # create branches + commit
       pull-requests: write  # open PRs
       issues: write         # post comments on the issue
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4

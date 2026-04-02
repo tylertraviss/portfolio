@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import EmailGate from "@/components/EmailGate";
@@ -23,20 +24,58 @@ const SectionDivider = ({ number, label }: { number: string; label: string }) =>
   </div>
 );
 
+const BlogHeader = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <motion.header
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+        scrolled ? "border-b border-border bg-background/90 backdrop-blur-md shadow-sm" : ""
+      }`}
+    >
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+        <a
+          href="/"
+          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Tyler Travis
+        </a>
+
+        <motion.p
+          animate={{ opacity: scrolled ? 1 : 0, y: scrolled ? 0 : 4 }}
+          transition={{ duration: 0.2 }}
+          className="hidden max-w-xs truncate text-sm font-medium text-foreground md:block"
+        >
+          Junior Devs Are Finished. Here's the AI-Architect Roadmap.
+        </motion.p>
+
+        <a
+          href="https://www.youtube.com/@tylertraviss"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-full bg-foreground px-4 py-2 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-80"
+        >
+          Watch on YouTube
+        </a>
+      </div>
+    </motion.header>
+  );
+};
+
 const AIArchitectRoadmap = () => (
   <EmailGate storageKey="ai_architect_roadmap_unlocked">
     <div className="min-h-screen bg-background">
-
-      {/* Nav */}
-      <div className="mx-auto max-w-5xl px-6 pt-8">
-        <a
-          href="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to Portfolio
-        </a>
-      </div>
+      <BlogHeader />
 
       {/* Hero */}
       <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 text-center">
@@ -77,8 +116,8 @@ const AIArchitectRoadmap = () => (
             transition={{ delay: 0.3 }}
             className="mb-6 font-display text-5xl leading-tight tracking-tight text-foreground md:text-7xl"
           >
-            The last junior class{" "}
-            <span className="text-gradient">already graduated.</span>
+            You're not losing to other engineers.{" "}
+            <span className="text-gradient">You're losing to an API call.</span>
           </motion.h1>
 
           {/* Divider with pivot */}

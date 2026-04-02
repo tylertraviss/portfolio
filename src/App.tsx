@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import YoureUsingClaudeWrong from "./pages/YoureUsingClaudeWrong";
+import AIArchitectRoadmap from "./pages/AIArchitectRoadmap";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/youre-using-claude-wrong" element={<YoureUsingClaudeWrong />} />
+          <Route path="/ai-architect-roadmap-2026" element={<AIArchitectRoadmap />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

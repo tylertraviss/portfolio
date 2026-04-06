@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import EmailGate from "@/components/EmailGate";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -73,7 +72,6 @@ const BlogHeader = () => {
 };
 
 const AIArchitectRoadmap = () => (
-  <EmailGate storageKey="ai_architect_roadmap_unlocked">
     <div className="min-h-screen bg-background">
       <BlogHeader />
 
@@ -503,7 +501,6 @@ const AIArchitectRoadmap = () => (
 
       </article>
     </div>
-  </EmailGate>
 );
 
 export default AIArchitectRoadmap;

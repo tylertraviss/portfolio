@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import EmailGate from "@/components/EmailGate";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -35,7 +34,6 @@ const BeforeAfter = ({
 );
 
 const YoureUsingClaudeWrong = () => (
-  <EmailGate storageKey="yucw_unlocked">
     <div className="min-h-screen bg-background">
 
       {/* Nav */}
@@ -290,7 +288,6 @@ Format: numbered list, grouped by severity.`} />
         </motion.div>
       </section>
     </div>
-  </EmailGate>
 );
 
 export default YoureUsingClaudeWrong;

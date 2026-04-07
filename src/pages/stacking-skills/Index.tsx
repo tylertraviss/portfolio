@@ -21,7 +21,7 @@ const StackingSkills = () => {
       </motion.div>
 
       {/* Hero */}
-      <section className="relative flex min-h-screen flex-col items-start justify-center px-6 md:px-12 lg:px-24 xl:px-32">
+      <section className="relative flex min-h-screen flex-col items-start justify-center px-6 pt-16 md:px-12 lg:px-24 xl:px-32">
         <div className="w-full max-w-5xl">
           <motion.p
             initial={{ opacity: 0, y: 20 }}

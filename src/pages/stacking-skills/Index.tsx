@@ -67,7 +67,7 @@ const StackingSkills = () => {
       </motion.div>
 
       {/* Hero */}
-      <section className="relative flex min-h-screen flex-col items-start justify-center px-6 pt-16 md:px-12 lg:px-24 xl:px-32">
+      <section className="relative flex min-h-screen flex-col items-start justify-center px-6 pb-16 pt-24 md:px-12 lg:px-24 xl:px-32">
         <div className="w-full max-w-5xl">
           <div className="flex flex-col gap-16 md:flex-row md:items-center md:gap-12">
 
@@ -229,16 +229,6 @@ const StackingSkills = () => {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          className="absolute bottom-10 left-6 md:left-12 lg:left-24 xl:left-32 flex items-center gap-3"
-        >
-          <div className="h-px w-12 bg-border" />
-          <span className="text-xs uppercase tracking-widest text-muted-foreground">Scroll</span>
-        </motion.div>
       </section>
 
       {/* Social proof */}

@@ -42,9 +42,15 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
       .insert({ name: name.trim(), email: email.trim(), page: `/stacking-skills/${tier}`, tier });
     setLoading(false);
     if (dbError) {
-      if (dbError.code === "23505") { setIsReturning(true); setSubmitted(true); return; }
+      if (dbError.code === "23505") {
+        if (tier === "community") window.open(SLACK_INVITE_URL, "_blank", "noopener,noreferrer");
+        setIsReturning(true); setSubmitted(true); return;
+      }
       setError("Something went wrong. Please try again.");
       return;
+    }
+    if (tier === "community") {
+      window.open(SLACK_INVITE_URL, "_blank", "noopener,noreferrer");
     }
     setSubmitted(true);
   };

@@ -10,6 +10,8 @@ import AIArchitectRoadmap from "./pages/AIArchitectRoadmap";
 import StackingSkills from "./pages/stacking-skills/Index";
 import Community from "./pages/stacking-skills/Community";
 import Premium from "./pages/stacking-skills/Premium";
+import CommunitySuccess from "./pages/stacking-skills/CommunitySuccess";
+import PremiumSuccess from "./pages/stacking-skills/PremiumSuccess";
 import EmailGate from "@/components/EmailGate";
 
 const queryClient = new QueryClient();
@@ -32,6 +34,8 @@ const App = () => (
           <Route path="/stacking-skills" element={<StackingSkills />} />
           <Route path="/stacking-skills/community" element={<Community />} />
           <Route path="/stacking-skills/premium" element={<Premium />} />
+          <Route path="/stacking-skills/community/success" element={<CommunitySuccess />} />
+          <Route path="/stacking-skills/premium/success" element={<PremiumSuccess />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

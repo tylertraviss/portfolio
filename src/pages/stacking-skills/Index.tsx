@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, Lock, Zap } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
@@ -25,12 +25,16 @@ interface TierFormProps {
 }
 
 const TierForm = ({ tier, dark }: TierFormProps) => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [isReturning, setIsReturning] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const onSuccess = () => {
+    if (tier === "community") window.open(SLACK_INVITE_URL, "_blank", "noopener,noreferrer");
+    navigate(`/stacking-skills/${tier}/success`);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,17 +46,11 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
       .insert({ name: name.trim(), email: email.trim(), page: `/stacking-skills/${tier}`, tier });
     setLoading(false);
     if (dbError) {
-      if (dbError.code === "23505") {
-        if (tier === "community") window.open(SLACK_INVITE_URL, "_blank", "noopener,noreferrer");
-        setIsReturning(true); setSubmitted(true); return;
-      }
+      if (dbError.code === "23505") { onSuccess(); return; }
       setError("Something went wrong. Please try again.");
       return;
     }
-    if (tier === "community") {
-      window.open(SLACK_INVITE_URL, "_blank", "noopener,noreferrer");
-    }
-    setSubmitted(true);
+    onSuccess();
   };
 
   const inputClass = `rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2 transition-colors ${
@@ -63,35 +61,6 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
 
   const labelClass = `text-sm font-medium ${dark ? "text-white/70" : "text-foreground"}`;
   const errorClass = `text-sm ${dark ? "text-red-300" : "text-red-500"}`;
-
-  if (submitted) {
-    return (
-      <div className="flex flex-col items-center gap-3 py-2 text-center">
-        {tier === "community" ? (
-          <>
-            <p className={`text-xl font-bold ${dark ? "text-white" : "text-foreground"}`}>
-              {isReturning ? "Welcome back! 👋" : "You're in! 🎉"}
-            </p>
-            <p className={`text-sm ${dark ? "text-white/60" : "text-muted-foreground"}`}>
-              {isReturning ? "Good to see you again." : "Click below to join the Slack."}
-            </p>
-            <a
-              href={SLACK_INVITE_URL} target="_blank" rel="noopener noreferrer"
-              className="mt-1 rounded-lg px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-              style={{ background: "hsl(var(--purple))" }}
-            >
-              Join on Slack
-            </a>
-          </>
-        ) : (
-          <>
-            <p className="text-xl font-bold text-white">{isReturning ? "Already on the list." : "You're on the list! 🚀"}</p>
-            <p className="text-sm text-white/60">{isReturning ? "We'll reach out when Premium launches." : "Founding member pricing locked in."}</p>
-          </>
-        )}
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3">

@@ -9,21 +9,19 @@ const SLACK_INVITE_URL = "https://join.slack.com/t/stackingskillsgroup/shared_in
 type Tab = "community" | "premium";
 
 const COMMUNITY_PERKS = [
-  { label: "Slack community access", sub: "Join engineers figuring it out together" },
-  { label: "#ai-tools", sub: "Prompts & workflows that actually save time" },
-  { label: "#job-hunt", sub: "Resume reviews, referrals & interview prep" },
-  { label: "#code-review", sub: "Real feedback on your code, no judgment" },
-  { label: "#show-and-tell", sub: "Ship something? Show the community" },
-  { label: "#general-chat", sub: "Daily conversation & support" },
+  { label: "Slack Community Access", sub: "6 dedicated channels: #ai-tools, #job-hunt, #code-review, #show-and-tell, #general-chat, and #wins" },
+  { label: "Weekly Blog Posts", sub: "Real insights on AI tooling, fintech engineering, and breaking into the industry" },
+  { label: "Direct Line to Tyler", sub: "Ask questions in the community and get responses from someone actively working in the field" },
+  { label: "#ai-tools", sub: "Prompts, Cursor workflows, and Claude setups that actually save hours" },
+  { label: "#job-hunt", sub: "Resume reviews, referrals, live job postings, and interview prep" },
+  { label: "#code-review", sub: "Drop your code, get honest feedback — no gatekeeping" },
 ];
 
 const PREMIUM_PERKS = [
-  { label: "Everything in Community", sub: "Full Slack access included", highlight: false },
-  { label: "AI-Native Development", sub: "Claude, Cursor & LLMs as real force multipliers", highlight: true },
-  { label: "Breaking Into Fintech", sub: "Regulated environments, backlog & hiring playbook", highlight: true },
-  { label: "Portfolio & Resume Frameworks", sub: "What recruiters actually look for", highlight: true },
-  { label: "Founding Member Pricing", sub: "Locked in forever at launch price", highlight: true },
-  { label: "Direct Access to Tyler", sub: "Ask questions, get real answers", highlight: true },
+  { label: "Everything in Community", sub: "Full Slack access, blog posts, and direct line to Tyler", highlight: false },
+  { label: "Founding Member Pricing", sub: "Lock in your price forever — never pays more as we grow", highlight: true },
+  { label: "Exclusive Courses", sub: "AI-native development, breaking into fintech, portfolio frameworks that land interviews", highlight: true },
+  { label: "Priority 1:1 Advice", sub: "Jump the queue — your questions get answered first, every time", highlight: true },
 ];
 
 const StackingSkills = () => {

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { revealVariants, staggerContainer } from "@/hooks/useTextReveal";
 
 const experiences = [
   {
@@ -42,39 +43,41 @@ const experiences = [
 
 const ExperienceSection = () => {
   return (
-    <section className="section-padding bg-card" id="experience">
+    <section className="section-padding border-t border-border" id="experience">
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
         className="mx-auto max-w-5xl"
       >
-        <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-primary">Experience</p>
-        <h2 className="mb-16 font-display text-3xl text-foreground md:text-4xl">
-          Where I've worked
-        </h2>
+        <motion.p
+          variants={revealVariants}
+          custom={0}
+          className="mb-16 text-xs font-medium uppercase tracking-widest text-muted-foreground"
+        >
+          Experience
+        </motion.p>
 
-        <div className="space-y-0">
+        <div>
           {experiences.map((exp, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group grid gap-4 border-t border-border py-8 md:grid-cols-[200px_1fr]"
+              variants={revealVariants}
+              custom={i * 0.1}
+              className="group grid gap-6 border-t border-border py-10 md:grid-cols-[1fr_3fr]"
             >
-              <p className="text-sm text-muted-foreground">{exp.period}</p>
               <div>
-                <h3 className="mb-1 text-lg font-semibold text-foreground">
-                  {exp.title}
+                <p className="text-xs uppercase tracking-widest text-muted-foreground">{exp.period}</p>
+              </div>
+              <div>
+                <h3 className="mb-1 text-2xl font-bold text-foreground md:text-3xl">
+                  {exp.company}
                 </h3>
-                <p className="mb-4 text-sm font-medium text-primary">{exp.company}</p>
+                <p className="mb-5 text-sm text-muted-foreground">{exp.title}</p>
                 <ul className="space-y-2">
                   {exp.bullets.map((b, j) => (
-                    <li key={j} className="flex gap-3 text-sm text-muted-foreground">
-                      <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-primary/60" />
+                    <li key={j} className="text-sm leading-relaxed text-muted-foreground">
                       {b}
                     </li>
                   ))}
@@ -82,6 +85,7 @@ const ExperienceSection = () => {
               </div>
             </motion.div>
           ))}
+          <div className="border-t border-border" />
         </div>
       </motion.div>
     </section>

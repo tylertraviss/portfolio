@@ -235,7 +235,7 @@ const StackingSkills = () => {
       <section className="border-t border-border px-6 py-16 md:px-12 lg:px-24 xl:px-32">
         <div className="mx-auto max-w-5xl">
           <p className="text-center text-xs font-medium uppercase tracking-widest text-muted-foreground/50">
-            Built by a software engineer who shipped at Fintex · TD Bank · Breathe Biomedical
+            Built by a software engineer who made his way from a rural community, to silicon valley.
           </p>
         </div>
       </section>

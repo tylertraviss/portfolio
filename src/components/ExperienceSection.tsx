@@ -18,8 +18,10 @@ const experiences = [
     company: "QA Consultants",
     period: "May 2024 – Mar 2025",
     bullets: [
-      "Built automated testing frameworks for high-stakes applications in healthcare, fintech, and gaming, significantly facilitating a shift toward CI and reducing the time-to-market for critical feature updates.",
-      "Modularized common functionality by applying DRY principles across business-critical workflows, significantly reducing technical debt and improving long-term maintainability.",
+      "Built automated regression testing frameworks using Selenium and Pytest for high-stakes applications in healthcare, fintech, and gaming, significantly reducing time-to-market for critical feature releases.",
+      "Delivered end-to-end test coverage for Liquidity Software's financial platform, identifying critical defects pre-release and contributing to a measurable reduction in production incidents and MTTR.",
+      "Developed automated test suites for video game clients, covering gameplay logic, UI flows, and performance edge cases — enabling faster release cycles without sacrificing quality.",
+      "Modularized common test functionality by applying DRY principles across business-critical workflows, reducing test maintenance overhead and improving long-term suite maintainability.",
     ],
   },
   {

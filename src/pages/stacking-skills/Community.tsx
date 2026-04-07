@@ -30,7 +30,7 @@ const Community = () => {
     setLoading(true);
     const { error: dbError } = await supabase
       .from("email_gate_submissions")
-      .insert({ name: name.trim(), email: email.trim(), role: "Community", page: "/stacking-skills/community" });
+      .insert({ name: name.trim(), email: email.trim(), page: "/stacking-skills/community", tier: "community" });
 
     setLoading(false);
 

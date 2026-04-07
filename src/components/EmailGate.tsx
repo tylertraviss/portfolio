@@ -45,7 +45,7 @@ const EmailGate = ({ storageKey, children }: EmailGateProps) => {
 
     const { error: dbError } = await supabase
       .from("email_gate_submissions")
-      .insert({ name: name.trim(), email: email.trim(), role, page: storageKey });
+      .insert({ name: name.trim(), email: email.trim(), role, page: storageKey, tier: "community" });
 
     if (dbError) {
       if (dbError.code === "23505") {

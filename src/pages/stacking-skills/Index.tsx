@@ -37,8 +37,8 @@ const StackingSkills = () => {
       .insert({
         name: name.trim(),
         email: email.trim(),
-        role: tab === "community" ? "Community" : "Premium Waitlist",
         page: `/stacking-skills/${tab}`,
+        tier: tab === "community" ? "community" : "premium",
       });
     setLoading(false);
 

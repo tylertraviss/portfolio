@@ -46,7 +46,7 @@ const Premium = () => {
     setLoading(true);
     const { error: dbError } = await supabase
       .from("email_gate_submissions")
-      .insert({ name: name.trim(), email: email.trim(), role: "Premium Waitlist", page: "/stacking-skills/premium" });
+      .insert({ name: name.trim(), email: email.trim(), page: "/stacking-skills/premium", tier: "premium" });
 
     setLoading(false);
 

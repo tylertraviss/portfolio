@@ -1,86 +1,96 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import tylerHeadshot from "@/assets/tyler-headshot.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden section-padding text-center" id="home">
-      {/* Gradient orbs */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-gradient-to-br from-primary/20 via-accent/15 to-transparent blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-accent/10 via-primary/10 to-transparent blur-3xl" />
-      </div>
+    <section
+      className="relative flex min-h-screen flex-col items-start justify-center px-6 md:px-12 lg:px-24 xl:px-32"
+      id="home"
+    >
+      <div className="w-full max-w-5xl">
+        <div className="flex flex-col gap-8 md:flex-row md:items-stretch md:justify-between">
 
-      <div className="relative z-10 grid w-full max-w-6xl gap-10 md:grid-cols-2 md:items-center">
-        <div>
+          {/* Left: all text content */}
+          <div className="flex flex-col justify-between">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              className="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground"
+            >
+              Software Engineer
+            </motion.p>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
+              className="text-[clamp(3rem,10vw,8rem)] font-black leading-[0.95] tracking-tighter text-foreground"
+            >
+              Tyler
+              <br />
+              Travis.
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
+              className="mt-8 max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg"
+            >
+              Building reliable, scalable systems across fintech, healthcare, and AI.
+              Turning complexity into software teams can confidently ship.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.7 }}
+              className="mt-10 flex items-center gap-8"
+            >
+              <a
+                href="#experience"
+                className="group relative inline-flex items-center gap-3 text-sm font-medium uppercase tracking-widest text-foreground transition-colors"
+              >
+                <span className="relative z-10 px-4 py-2.5">View Work</span>
+                <span className="absolute inset-0 scale-90 rounded-sm border border-foreground opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100" />
+              </a>
+              <a
+                href="#contact"
+                className="group relative inline-flex items-center gap-3 text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <span className="relative z-10 px-4 py-2.5">Get in Touch</span>
+                <span className="absolute inset-0 scale-90 rounded-sm border border-border opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 group-hover:border-foreground" />
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right: photo — stretches to match left column height */}
           <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm text-muted-foreground shadow-sm"
-        >
-          <span className="h-2 w-2 rounded-full bg-primary" />
-          Open to new opportunities
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mb-6 font-display text-5xl leading-tight tracking-tight text-foreground md:text-7xl md:leading-[1.1]"
-        >
-          Building software that{" "}
-          <span className="text-gradient">scales.</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-muted-foreground"
-        >
-          Software engineer & product thinker with experience across fintech, healthcare, 
-          and AI — turning complex problems into elegant, reliable systems.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="flex flex-wrap justify-center gap-4"
-        >
-          <a
-            href="#experience"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-80"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+            className="hidden shrink-0 md:flex"
           >
-            View My Work
-            <ArrowRight className="h-4 w-4" />
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-7 py-3 text-sm font-semibold text-foreground shadow-sm transition-all hover:shadow-md"
-          >
-            Get In Touch
-          </a>
-        </motion.div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mx-auto flex items-center justify-center"
-        >
-          <div className="relative">
-            <div className="absolute -right-6 -top-6 hidden h-32 w-32 rounded-full bg-primary/15 blur-3xl md:block" />
             <img
               src={tylerHeadshot}
-              alt="Tyler Travis headshot"
-              className="relative z-10 h-64 w-64 rounded-[32px] object-cover shadow-2xl border border-border md:h-80 md:w-80"
+              alt="Tyler Travis"
+              className="h-full w-64 rounded-2xl object-cover xl:w-80"
             />
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
+        className="absolute bottom-10 left-6 md:left-12 lg:left-24 xl:left-32 flex items-center gap-3"
+      >
+        <div className="h-px w-12 bg-border" />
+        <span className="text-xs uppercase tracking-widest text-muted-foreground">Scroll</span>
+      </motion.div>
     </section>
   );
 };

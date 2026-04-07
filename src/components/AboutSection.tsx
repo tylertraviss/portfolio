@@ -1,125 +1,101 @@
-import { motion } from "framer-motion";
-import tylerPhoto from "@/assets/tyler-photo.png";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { revealVariants, staggerContainer } from "@/hooks/useTextReveal";
 
 const skillGroups = [
-  {
-    label: "Languages",
-    items: [
-      "Python",
-      "Java",
-      "C++",
-      "C",
-      "C#",
-      "JavaScript",
-      "TypeScript",
-      "SQL",
-      "HTML5",
-      "CSS3",
-      "LabVIEW",
-      "Assembly",
-    ],
-  },
-  {
-    label: "Frameworks",
-    items: [
-      "React",
-      "shadcn/ui",
-      "Radix UI",
-      "Tailwind CSS",
-      "Framer Motion",
-      "Node.js",
-      "Express.js",
-      "Flask",
-      "TensorFlow",
-      "OpenCV",
-      "pandas",
-      "Bootstrap",
-    ],
-  },
-  {
-    label: "Dev Tools",
-    items: [
-      "Git",
-      "GitHub",
-      "Docker",
-      "Kubernetes",
-      "Jenkins",
-      "CI/CD Automation",
-      "AWS",
-      "Azure",
-      "Jira",
-      "Asana",
-      "pnpm",
-      "Bun",
-      "Vite",
-      "Vitest",
-      "React Testing Library",
-      "ESLint",
-    ],
-  },
-  {
-    label: "AI Tools",
-    items: ["ChatGPT", "Claude", "Cursor", "Lovable", "OpenAI API", "Prompt Engineering"],
-  },
+  { label: "Languages",  items: ["Python", "Java", "C++", "C", "C#", "JavaScript", "TypeScript", "SQL", "Assembly", "REST API"] },
+  { label: "Frameworks", items: ["React.js", "Flask", "Node.js", "Express.js", "TensorFlow", "OpenCV", "pandas", "Bootstrap"] },
+  { label: "Tools",      items: ["Git", "GitHub", "Docker", "Kubernetes", "Jenkins", "Jira", "Asana", "Trello", "AWS", "Azure"] },
+  { label: "AI",         items: ["Claude", "ChatGPT", "OpenAI API", "Cursor", "Lovable", "Prompt Engineering"] },
 ];
 
 const AboutSection = () => {
+  const [expanded, setExpanded] = useState(false);
+
   return (
-    <section className="section-padding" id="about">
+    <section className="section-padding border-t border-border" id="about">
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
         className="mx-auto max-w-5xl"
       >
-        <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-primary">About</p>
-        {/* <h2 className="mb-12 font-display text-3xl text-foreground md:text-4xl">
-          A bit about me
-        </h2> */}
+        <div className="grid gap-16 md:grid-cols-2 md:gap-24">
 
-        <div className="grid gap-12 md:grid-cols-[3fr_2fr]">
-          <div className="space-y-5 text-muted-foreground leading-relaxed flex flex-col items-center text-center md:items-start md:text-left">
-            <div className="mb-6 flex justify-center">
-              {/* <img
-                src={tylerPhoto}
-                alt="Tyler Travis"
-                className="h-40 w-40 rounded-2xl object-cover shadow-md border border-border"
-              /> */}
-            </div>
-
-<p>
-  I'm a software engineer with a passion for building reliable, scalable systems that don’t just work — they hold up under pressure. I care deeply about quality, performance, and creating software that teams can confidently ship. Over the past few years, I’ve worked across fintech, healthcare, and gaming — from designing automated testing frameworks at QA Consultants to developing machine learning models at Breathe Biomedical.
-</p>
-
-<p>
-  Currently, I'm a Software Product Manager at Fintex Inc., where I guide discovery, system definition, and delivery across three regulated financial platforms serving 2M+ daily users, including Tangerine, BMO, and Aviso. I bridge the gap between business and engineering — translating ambiguity into clear requirements, aligning stakeholders, and ensuring what gets built is scalable, compliant, and resilient.
-</p>
-
-<p>
-  I hold a B.Sc. in Software Engineering from the University of New Brunswick. Outside of tech, I’m equally driven — I’ve acted in CBC’s Macy Murdoch, coached youth soccer for over 1,000 hours, and helped organize the inaugural Microsoft AI Day. Whether it’s software, sport, or storytelling, I’m drawn to building things that make an impact.
-</p>
-          </div>
-
+          {/* Left: About */}
           <div className="space-y-6">
-            {skillGroups.map((group) => (
-              <div key={group.label}>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-primary">
-                  {group.label}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {group.items.map((s) => (
-                    <span
-                      key={s}
-                      className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-secondary-foreground shadow-sm transition-colors hover:border-primary/40 hover:text-primary"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+            <motion.p variants={revealVariants} custom={0} className="mb-10 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+              About
+            </motion.p>
+
+            <motion.p variants={revealVariants} custom={0.1} className="text-lg leading-relaxed text-foreground md:text-xl">
+              I'm a software engineer with a passion for building reliable, scalable systems
+              that don't just work — they hold up under pressure.
+            </motion.p>
+            <motion.p variants={revealVariants} custom={0.2} className="text-base leading-relaxed text-muted-foreground">
+              Over the past few years, I've worked across fintech, healthcare, and gaming — from designing
+              automated testing frameworks at QA Consultants to developing machine learning models at
+              Breathe Biomedical.
+            </motion.p>
+
+            <AnimatePresence>
+              {expanded && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-6 overflow-hidden"
+                >
+                  <p className="text-base leading-relaxed text-muted-foreground">
+                    Currently at Fintex Inc., I guide discovery and delivery across three regulated financial
+                    platforms serving 2M+ daily users, including Tangerine, BMO, and Aviso. I bridge the gap
+                    between business and engineering — translating ambiguity into clear requirements and
+                    ensuring what gets built is scalable, compliant, and resilient.
+                  </p>
+                  <p className="text-base leading-relaxed text-muted-foreground">
+                    B.Sc. Software Engineering, University of New Brunswick. Outside of tech: actor on CBC's
+                    Macy Murdoch, 1,000+ hours coaching youth soccer, and co-organizer of the inaugural
+                    Microsoft AI Day.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <motion.button
+              variants={revealVariants}
+              custom={0.3}
+              onClick={() => setExpanded((e) => !e)}
+              className="group relative inline-flex items-center text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <span className="relative z-10 px-4 py-2.5">
+                {expanded ? "Read Less" : "Read More"}
+              </span>
+              <span className="absolute inset-0 scale-90 rounded-sm border border-border opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 group-hover:border-foreground" />
+            </motion.button>
           </div>
+
+          {/* Right: Skills */}
+          <div>
+            <motion.p variants={revealVariants} custom={0} className="mb-10 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+              Skills
+            </motion.p>
+
+            <div className="space-y-8">
+              {skillGroups.map((group, i) => (
+                <motion.div key={group.label} variants={revealVariants} custom={i * 0.1}>
+                  <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-foreground/50">
+                    {group.label}
+                  </p>
+                  <p className="text-sm leading-relaxed text-foreground">
+                    {group.items.join(", ")}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </motion.div>
     </section>

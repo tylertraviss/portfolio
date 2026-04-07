@@ -7,6 +7,9 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import YoureUsingClaudeWrong from "./pages/YoureUsingClaudeWrong";
 import AIArchitectRoadmap from "./pages/AIArchitectRoadmap";
+import StackingSkills from "./pages/stacking-skills/Index";
+import Community from "./pages/stacking-skills/Community";
+import Premium from "./pages/stacking-skills/Premium";
 import EmailGate from "@/components/EmailGate";
 
 const queryClient = new QueryClient();
@@ -26,6 +29,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/youre-using-claude-wrong" element={<GatedRoute element={<YoureUsingClaudeWrong />} />} />
           <Route path="/ai-architect-roadmap-2026" element={<GatedRoute element={<AIArchitectRoadmap />} />} />
+          <Route path="/stacking-skills" element={<StackingSkills />} />
+          <Route path="/stacking-skills/community" element={<Community />} />
+          <Route path="/stacking-skills/premium" element={<Premium />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

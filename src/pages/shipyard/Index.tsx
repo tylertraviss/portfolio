@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, Lock, Zap } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
-const SLACK_INVITE_URL = "https://join.slack.com/t/shipyard-tech/shared_invite/zt-3uolq13is-C1OiGgoT0fszRl8XIqm5jA";
-
 const COMMUNITY_PERKS = [
   { label: "Slack Community Access", sub: "6 channels: #ai-tools, #job-hunt, #code-review, #show-and-tell, #general-chat, #wins" },
   { label: "Weekly Blog Posts", sub: "AI tooling, fintech engineering, and breaking into the industry" },
@@ -32,7 +30,6 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
   const [loading, setLoading] = useState(false);
 
   const onSuccess = () => {
-    if (tier === "community") window.open(SLACK_INVITE_URL, "_blank", "noopener,noreferrer");
     navigate(`/shipyard/${tier}/success`);
   };
 

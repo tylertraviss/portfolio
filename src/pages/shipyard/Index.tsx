@@ -234,7 +234,7 @@ const Shipyard = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.85 }}
-            className="mt-10"
+            className="mt-10 flex items-center gap-4"
           >
             <a
               href="#plans"
@@ -247,6 +247,12 @@ const Shipyard = () => {
                 View Plans
               </span>
             </a>
+            <button
+              onClick={() => setMemberModalOpen(true)}
+              className="text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Log in
+            </button>
           </motion.div>
         </div>
       </section>

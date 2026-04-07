@@ -69,7 +69,7 @@ const StackingSkills = () => {
       {/* Hero */}
       <section className="relative flex min-h-screen flex-col items-start justify-center px-6 pb-16 pt-24 md:px-12 lg:px-24 xl:px-32">
         <div className="w-full max-w-5xl">
-          <div className="flex flex-col gap-16 md:flex-row md:items-center md:gap-12">
+          <div className="flex flex-col gap-16 md:flex-row md:items-center md:gap-12 md:justify-between">
 
             {/* Left: text */}
             <div className="flex-1">

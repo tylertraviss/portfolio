@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Check, Lock, Zap } from "lucide-react";
+import { ArrowLeft, Check, Lock, Zap, X } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 const COMMUNITY_PERKS = [
@@ -91,18 +91,104 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
   );
 };
 
+const MemberLoginModal = ({ onClose }: { onClose: () => void }) => {
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim()) { setError("Name and email are required."); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError("Please enter a valid email."); return; }
+    setLoading(true);
+    const { data, error: dbError } = await supabase
+      .from("email_gate_submissions")
+      .select("id")
+      .eq("email", email.trim().toLowerCase())
+      .maybeSingle();
+    setLoading(false);
+    if (dbError || !data) {
+      setError("We couldn't find that email. Make sure you've joined as a member.");
+      return;
+    }
+    navigate("/shipyard/dashboard");
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 10 }}
+        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full max-w-sm rounded-2xl border border-border bg-background p-8 shadow-2xl"
+      >
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <X className="h-4 w-4" />
+        </button>
+        <p className="mb-1 text-xs font-medium uppercase tracking-widest text-muted-foreground">Member Access</p>
+        <h2 className="mb-1 text-2xl font-black tracking-tight text-foreground">Welcome back.</h2>
+        <p className="mb-6 text-sm text-muted-foreground">Enter the name and email you signed up with.</p>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-foreground">Name</label>
+            <input
+              type="text" placeholder="Your name" value={name}
+              onChange={(e) => { setName(e.target.value); setError(""); }}
+              className="rounded-lg border border-border bg-muted px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-foreground">Email</label>
+            <input
+              type="email" placeholder="you@example.com" value={email}
+              onChange={(e) => { setEmail(e.target.value); setError(""); }}
+              className="rounded-lg border border-border bg-muted px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          {error && <p className="text-sm text-red-500">{error}</p>}
+          <button
+            type="submit" disabled={loading}
+            className="mt-1 rounded-lg py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+            style={{ background: "hsl(var(--purple))" }}
+          >
+            {loading ? "Checking..." : "Go to Dashboard"}
+          </button>
+        </form>
+      </motion.div>
+    </div>
+  );
+};
+
 const Shipyard = () => {
+  const [memberModalOpen, setMemberModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
+      <AnimatePresence>
+        {memberModalOpen && <MemberLoginModal onClose={() => setMemberModalOpen(false)} />}
+      </AnimatePresence>
+
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 z-50 px-6 py-5 md:px-12 lg:px-24 xl:px-32"
+        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 py-5 md:px-12 lg:px-24 xl:px-32"
       >
         <Link to="/" className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
           <ArrowLeft className="h-3 w-3" /> Tyler Travis
         </Link>
+        <button
+          onClick={() => setMemberModalOpen(true)}
+          className="text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Already a member?
+        </button>
       </motion.div>
 
       {/* Hero */}

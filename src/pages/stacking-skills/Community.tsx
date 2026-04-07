@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { revealVariants, staggerContainer } from "@/hooks/useTextReveal";
-import Navbar from "@/components/Navbar";
 
 // Replace with your actual never-expiring Slack invite link
 const SLACK_INVITE_URL = "https://join.slack.com/t/your-workspace/shared_invite/your-link";
@@ -50,7 +49,19 @@ const Community = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 z-50 px-6 py-5 md:px-12 lg:px-24 xl:px-32"
+      >
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-3 w-3" /> Tyler Travis
+        </Link>
+      </motion.div>
 
       <section className="px-6 pt-40 pb-32 md:px-12 lg:px-24 xl:px-32">
         <motion.div

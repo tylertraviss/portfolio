@@ -1,13 +1,24 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { revealVariants, staggerContainer } from "@/hooks/useTextReveal";
-import Navbar from "@/components/Navbar";
 
 const StackingSkills = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 z-50 px-6 py-5 md:px-12 lg:px-24 xl:px-32"
+      >
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-3 w-3" /> Tyler Travis
+        </Link>
+      </motion.div>
 
       {/* Hero */}
       <section className="relative flex min-h-screen flex-col items-start justify-center px-6 md:px-12 lg:px-24 xl:px-32">

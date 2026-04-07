@@ -134,7 +134,7 @@ const StackingSkills = () => {
       </motion.div>
 
       {/* Hero */}
-      <section className="px-6 pb-4 pt-32 md:px-12 lg:px-24 xl:px-32">
+      <section className="flex min-h-screen flex-col justify-center px-6 pb-16 pt-32 md:px-12 lg:px-24 xl:px-32">
         <div className="mx-auto max-w-6xl">
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -171,14 +171,32 @@ const StackingSkills = () => {
               ))}
             </div>
             <p className="text-sm text-muted-foreground">
-              Join engineers already building smarter with AI
+              Join 100+ engineers already building smarter with AI
             </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.85 }}
+            className="mt-10"
+          >
+            <a
+              href="#plans"
+              className="group relative inline-flex items-center text-sm font-medium uppercase tracking-widest text-white transition-opacity hover:opacity-90"
+            >
+              <span
+                className="relative z-10 rounded-full px-8 py-3"
+                style={{ background: "hsl(var(--purple))" }}
+              >
+                View Plans
+              </span>
+            </a>
           </motion.div>
         </div>
       </section>
 
       {/* Cards */}
-      <section className="px-6 pb-24 md:px-12 lg:px-24 xl:px-32">
+      <section id="plans" className="px-6 pb-24 pt-24 md:px-12 lg:px-24 xl:px-32">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-6 md:grid-cols-2 md:items-stretch">
 

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import tylerHeadshot from "@/assets/tyler-headshot.png";
 
 const HeroSection = () => {
@@ -62,6 +63,13 @@ const HeroSection = () => {
                 <span className="relative z-10 px-4 py-2.5">Get in Touch</span>
                 <span className="absolute inset-0 scale-90 rounded-sm border border-border opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 group-hover:border-foreground" />
               </a>
+              <Link
+                to="/stacking-skills"
+                className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-90"
+                style={{ background: "hsl(var(--purple))" }}
+              >
+                Join Community
+              </Link>
             </motion.div>
           </div>
 

@@ -52,7 +52,7 @@ const Navbar = () => {
             </a>
           ))}
           <Link
-            to="/stacking-skills"
+            to="/shipyard"
             className="rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-90"
             style={{ background: "hsl(var(--purple))" }}
             onClick={() => track("nav_click", { label: "Join" })}
@@ -93,7 +93,7 @@ const Navbar = () => {
                 </a>
               ))}
               <Link
-                to="/stacking-skills"
+                to="/shipyard"
                 className="inline-flex w-fit rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-90"
                 style={{ background: "hsl(var(--purple))" }}
                 onClick={() => { setMenuOpen(false); track("nav_click", { label: "Join" }); }}

@@ -1,15 +1,8 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
-const SLACK_INVITE_URL = "https://join.slack.com/t/stackingskillsgroup/shared_invite/zt-3uolq13is-C1OiGgoT0fszRl8XIqm5jA";
-
-const CommunitySuccess = () => {
-  useEffect(() => {
-    window.open(SLACK_INVITE_URL, "_blank", "noopener,noreferrer");
-  }, []);
-
+const PremiumSuccess = () => {
   return (
     <div className="min-h-screen bg-background">
       <motion.div
@@ -30,7 +23,7 @@ const CommunitySuccess = () => {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground"
           >
-            Community — Enrollment Confirmed
+            Premium — Waitlist Confirmed
           </motion.p>
 
           <motion.h1
@@ -38,9 +31,9 @@ const CommunitySuccess = () => {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
             className="mb-6 text-[clamp(2.5rem,7vw,6rem)] font-black leading-[0.95] tracking-tighter text-foreground"
           >
-            You're in.
+            You're on
             <br />
-            <span style={{ color: "hsl(var(--purple))" }}>Welcome.</span>
+            <span style={{ color: "hsl(var(--purple))" }}>the list.</span>
           </motion.h1>
 
           <motion.p
@@ -48,24 +41,25 @@ const CommunitySuccess = () => {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
             className="mb-8 text-base leading-relaxed text-muted-foreground md:text-lg"
           >
-            You've been successfully enrolled as a Community member of Stacking Skills.
-            Your Slack invite should be opening — if it didn't, click below.
+            You've been successfully enrolled on the Premium waitlist for Shipyard.
+            You'll be the first to know when we launch — and you'll be locked in at founding member pricing.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.7 }}
-            className="mb-10 rounded-2xl border border-border p-6"
+            className="mb-10 rounded-2xl border p-6"
+            style={{ borderColor: "hsl(var(--purple) / 0.3)", background: "hsl(262 50% 12%)" }}
           >
-            <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">What's next</p>
+            <p className="mb-4 text-xs font-medium uppercase tracking-widest text-white/50">What you'll get at launch</p>
             <ul className="space-y-3">
               {[
-                "Join the Slack and introduce yourself in #general-chat",
-                "Check out #ai-tools for prompts and workflows worth bookmarking",
-                "Drop your current project in #show-and-tell",
-                "Use #job-hunt if you're on the market — the community has your back",
+                "Exclusive courses — AI-native development, fintech, portfolio frameworks",
+                "Discounted 1:1 mentorship sessions with Tyler",
+                "Full Community access — Slack, blog posts, direct line to Tyler",
+                "Early access before Premium opens to the public",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
+                <li key={item} className="flex items-start gap-3 text-sm text-white/70">
                   <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full" style={{ background: "hsl(var(--purple))" }} />
                   {item}
                 </li>
@@ -78,20 +72,18 @@ const CommunitySuccess = () => {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
             className="flex flex-wrap items-center gap-4"
           >
-            <a
-              href={SLACK_INVITE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/shipyard"
               className="rounded-full px-8 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
               style={{ background: "hsl(var(--purple))" }}
             >
-              Open Slack
-            </a>
+              Back to Shipyard
+            </Link>
             <Link
-              to="/stacking-skills"
+              to="/"
               className="text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
             >
-              Back to Stacking Skills
+              Back to Portfolio
             </Link>
           </motion.div>
         </div>
@@ -100,4 +92,4 @@ const CommunitySuccess = () => {
   );
 };
 
-export default CommunitySuccess;
+export default PremiumSuccess;

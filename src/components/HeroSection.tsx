@@ -64,7 +64,7 @@ const HeroSection = () => {
                 <span className="absolute inset-0 scale-90 rounded-sm border border-border opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 group-hover:border-foreground" />
               </a>
               <Link
-                to="/stacking-skills"
+                to="/shipyard"
                 className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-90"
                 style={{ background: "hsl(var(--purple))" }}
               >

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, Lock, Zap } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
-const SLACK_INVITE_URL = "https://join.slack.com/t/stackingskillsgroup/shared_invite/zt-3uolq13is-C1OiGgoT0fszRl8XIqm5jA";
+const SLACK_INVITE_URL = "https://join.slack.com/t/shipyard-tech/shared_invite/zt-3uolq13is-C1OiGgoT0fszRl8XIqm5jA";
 
 const COMMUNITY_PERKS = [
   { label: "Slack Community Access", sub: "6 channels: #ai-tools, #job-hunt, #code-review, #show-and-tell, #general-chat, #wins" },
@@ -33,7 +33,7 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
 
   const onSuccess = () => {
     if (tier === "community") window.open(SLACK_INVITE_URL, "_blank", "noopener,noreferrer");
-    navigate(`/stacking-skills/${tier}/success`);
+    navigate(`/shipyard/${tier}/success`);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -43,7 +43,7 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
     setLoading(true);
     const { error: dbError } = await supabase
       .from("email_gate_submissions")
-      .insert({ name: name.trim(), email: email.trim(), page: `/stacking-skills/${tier}`, tier });
+      .insert({ name: name.trim(), email: email.trim(), page: `/shipyard/${tier}`, tier });
     setLoading(false);
     if (dbError) {
       if (dbError.code === "23505") { onSuccess(); return; }
@@ -94,7 +94,7 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
   );
 };
 
-const StackingSkills = () => {
+const Shipyard = () => {
   return (
     <div className="min-h-screen bg-background">
       <motion.div
@@ -116,7 +116,7 @@ const StackingSkills = () => {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground"
           >
-            A community for software engineers
+            A platform for software engineers
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
@@ -282,4 +282,4 @@ const StackingSkills = () => {
   );
 };
 
-export default StackingSkills;
+export default Shipyard;

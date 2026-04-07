@@ -7,11 +7,11 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import YoureUsingClaudeWrong from "./pages/YoureUsingClaudeWrong";
 import AIArchitectRoadmap from "./pages/AIArchitectRoadmap";
-import StackingSkills from "./pages/stacking-skills/Index";
-import Community from "./pages/stacking-skills/Community";
-import Premium from "./pages/stacking-skills/Premium";
-import CommunitySuccess from "./pages/stacking-skills/CommunitySuccess";
-import PremiumSuccess from "./pages/stacking-skills/PremiumSuccess";
+import Shipyard from "./pages/shipyard/Index";
+import Community from "./pages/shipyard/Community";
+import Premium from "./pages/shipyard/Premium";
+import CommunitySuccess from "./pages/shipyard/CommunitySuccess";
+import PremiumSuccess from "./pages/shipyard/PremiumSuccess";
 import EmailGate from "@/components/EmailGate";
 
 const queryClient = new QueryClient();
@@ -31,11 +31,11 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/youre-using-claude-wrong" element={<GatedRoute element={<YoureUsingClaudeWrong />} />} />
           <Route path="/ai-architect-roadmap-2026" element={<GatedRoute element={<AIArchitectRoadmap />} />} />
-          <Route path="/stacking-skills" element={<StackingSkills />} />
-          <Route path="/stacking-skills/community" element={<Community />} />
-          <Route path="/stacking-skills/premium" element={<Premium />} />
-          <Route path="/stacking-skills/community/success" element={<CommunitySuccess />} />
-          <Route path="/stacking-skills/premium/success" element={<PremiumSuccess />} />
+          <Route path="/shipyard" element={<Shipyard />} />
+          <Route path="/shipyard/community" element={<Community />} />
+          <Route path="/shipyard/premium" element={<Premium />} />
+          <Route path="/shipyard/community/success" element={<CommunitySuccess />} />
+          <Route path="/shipyard/premium/success" element={<PremiumSuccess />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -57,7 +57,7 @@ const Navbar = () => {
             style={{ background: "hsl(var(--purple))" }}
             onClick={() => track("nav_click", { label: "Join" })}
           >
-            Join
+            Join Community
           </Link>
         </div>
 
@@ -98,7 +98,7 @@ const Navbar = () => {
                 style={{ background: "hsl(var(--purple))" }}
                 onClick={() => { setMenuOpen(false); track("nav_click", { label: "Join" }); }}
               >
-                Join
+                Join Community
               </Link>
             </div>
           </motion.div>

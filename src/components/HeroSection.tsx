@@ -5,10 +5,10 @@ import tylerHeadshot from "@/assets/tyler-headshot.png";
 const HeroSection = () => {
   return (
     <section
-      className="relative flex min-h-screen flex-col items-start justify-center px-6 md:px-12 lg:px-24 xl:px-32"
+      className="relative flex min-h-screen flex-col items-start justify-center px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48"
       id="home"
     >
-      <div className="w-full max-w-5xl">
+      <div className="w-full max-w-6xl">
         <div className="flex flex-col gap-8 md:flex-row md:items-stretch md:justify-between">
 
           {/* Left: all text content */}
@@ -83,7 +83,7 @@ const HeroSection = () => {
             <img
               src={tylerHeadshot}
               alt="Tyler Travis"
-              className="h-full w-64 rounded-2xl object-cover xl:w-80"
+              className="h-full w-64 rounded-2xl object-cover lg:w-72 xl:w-96 2xl:w-[420px]"
             />
           </motion.div>
         </div>

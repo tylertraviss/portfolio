@@ -8,9 +8,9 @@ const experiences = [
     company: "Fintex Inc.",
     period: "Mar 2025 – Present",
     bullets: [
-      "Guiding discovery and delivery across three regulated financial platforms (Tangerine, BMO, Aviso) supporting 2M+ daily users.",
-      "Managing 2,000+ Jira artifacts maintaining backlog integrity and delivery readiness.",
-      "Transforming ambiguous ideas into quantifiable user stories with explicit acceptance criteria.",
+      "Guided discovery and delivery across three regulated financial services platforms (Tangerine, BMO, and Aviso), supporting products used by 2M+ active daily users and advisors across Canada.",
+      "Oversaw and actively managed 2,000+ Jira artifacts, including user stories, bugs, test cases, and refinements, maintaining backlog integrity, traceability, and delivery readiness across multiple regulated workstreams.",
+      "Transformed ambiguous, high-level ideas into clear, quantifiable user stories by asking the right discovery questions, defining negative and edge cases, and establishing explicit acceptance criteria.",
     ],
   },
   {
@@ -18,8 +18,8 @@ const experiences = [
     company: "QA Consultants",
     period: "May 2024 – Mar 2025",
     bullets: [
-      "Built automated testing frameworks for healthcare, fintech, and gaming, accelerating CI pipelines.",
-      "Modularized common functionality with DRY principles, reducing technical debt significantly.",
+      "Built automated testing frameworks for high-stakes applications in healthcare, fintech, and gaming, significantly facilitating a shift toward CI and reducing the time-to-market for critical feature updates.",
+      "Modularized common functionality by applying DRY principles across business-critical workflows, significantly reducing technical debt and improving long-term maintainability.",
     ],
   },
   {
@@ -27,8 +27,8 @@ const experiences = [
     company: "TD Bank",
     period: "Apr 2023 – Aug 2023",
     bullets: [
-      "Created an Agile sprint monitoring tool for the DaaS platform used by 12+ teams.",
-      "Co-founded the TD AI Club, hosting events that attracted 100+ members.",
+      "Created an Agile sprint monitoring tool for the DaaS platform, used by 12+ teams to manage scope.",
+      "Co-founded the TD AI Club, hosting monthly AI events that attracted 100+ members and built a community.",
     ],
   },
   {
@@ -36,8 +36,8 @@ const experiences = [
     company: "Breathe Biomedical",
     period: "May 2021 – Aug 2022",
     bullets: [
-      "Established a benchmark CNN model for lung cancer prediction at 85% accuracy.",
-      "Migrated 50% of system software from LabView to C++ for high-performance control logic.",
+      "Established an organizational benchmark CNN model for machine learning prediction on lung cancer at 85% accuracy.",
+      "Migrated 50% of system software from LabVIEW to C++, refactoring control logic for actuators, relays, and controllers into a high-performance framework.",
     ],
   },
 ];

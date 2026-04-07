@@ -6,7 +6,7 @@ import { supabase } from "@/lib/supabase";
 import { revealVariants, staggerContainer } from "@/hooks/useTextReveal";
 
 // Replace with your actual never-expiring Slack invite link
-const SLACK_INVITE_URL = "https://join.slack.com/t/your-workspace/shared_invite/your-link";
+const SLACK_INVITE_URL = "https://join.slack.com/t/stackingskillsgroup/shared_invite/zt-3uolq13is-C1OiGgoT0fszRl8XIqm5jA";
 
 const Community = () => {
   const [name, setName] = useState("");

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
-const SLACK_INVITE_URL = "https://join.slack.com/t/your-workspace/shared_invite/your-link";
+const SLACK_INVITE_URL = "https://join.slack.com/t/stackingskillsgroup/shared_invite/zt-3uolq13is-C1OiGgoT0fszRl8XIqm5jA";
 
 type Tab = "community" | "premium";
 
@@ -111,7 +111,7 @@ const StackingSkills = () => {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
               className="w-full md:w-[360px] shrink-0"
             >
-              <div className="rounded-2xl border border-border p-8">
+              <div className="rounded-2xl bg-background shadow-xl p-8">
                 {/* Toggle */}
                 <div className="mb-6 flex rounded-lg border border-border p-1">
                   {(["community", "premium"] as Tab[]).map((t) => (
@@ -138,20 +138,17 @@ const StackingSkills = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.25 }}
+                      className="flex flex-col items-center gap-3 py-4 text-center"
                     >
                       {tab === "community" ? (
                         <>
-                          <p className="mb-2 text-xl font-black tracking-tight text-foreground">
-                            {isReturning ? "Welcome back!" : "You're in."}
-                          </p>
-                          <p className="mb-6 text-sm text-muted-foreground">
-                            {isReturning ? "Good to see you again." : "Click below to join the Slack."}
-                          </p>
+                          <p className="text-2xl font-bold">{isReturning ? "Welcome back! 👋" : "You're in! 🎉"}</p>
+                          <p className="text-sm text-muted-foreground">{isReturning ? "Good to see you again." : "Click below to join the Slack."}</p>
                           <a
                             href={SLACK_INVITE_URL}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                            className="mt-2 rounded-lg px-5 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                             style={{ background: "hsl(var(--purple))" }}
                           >
                             Join on Slack
@@ -159,13 +156,9 @@ const StackingSkills = () => {
                         </>
                       ) : (
                         <>
-                          <p className="mb-2 text-xl font-black tracking-tight text-foreground">
-                            {isReturning ? "Already on the list." : "You're on the list."}
-                          </p>
+                          <p className="text-2xl font-bold">{isReturning ? "Already on the list." : "You're on the list! 🚀"}</p>
                           <p className="text-sm text-muted-foreground">
-                            {isReturning
-                              ? "We'll reach out when Premium launches."
-                              : "Founding member pricing is yours when we launch."}
+                            {isReturning ? "We'll reach out when Premium launches." : "Founding member pricing is yours when we launch."}
                           </p>
                         </>
                       )}
@@ -181,44 +174,46 @@ const StackingSkills = () => {
                       className="flex flex-col gap-4"
                     >
                       <div>
-                        <p className="mb-1 text-sm font-semibold text-foreground">
-                          {tab === "community" ? "Join the community — free." : "Reserve your spot."}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
+                        <h2 className="mb-1 text-2xl font-bold">
+                          {tab === "community" ? "Join the Community" : "Join the Waitlist"}
+                        </h2>
+                        <p className="text-sm text-muted-foreground">
                           {tab === "community"
-                            ? "Enter your details to get the Slack invite."
-                            : "First to know when we launch. Founding member pricing."}
+                            ? "Free access. Get the Slack invite instantly."
+                            : "Be first when Premium launches. Founding member pricing."}
                         </p>
                       </div>
 
-                      <input
-                        type="text"
-                        placeholder="Your name"
-                        value={name}
-                        onChange={(e) => { setName(e.target.value); setError(""); }}
-                        className="rounded-lg border border-border bg-muted px-3 py-2.5 text-sm outline-none transition-colors focus:border-foreground"
-                      />
-                      <input
-                        type="email"
-                        placeholder="you@example.com"
-                        value={email}
-                        onChange={(e) => { setEmail(e.target.value); setError(""); }}
-                        className="rounded-lg border border-border bg-muted px-3 py-2.5 text-sm outline-none transition-colors focus:border-foreground"
-                      />
+                      <div className="flex flex-col gap-1">
+                        <label className="text-sm font-medium">Name</label>
+                        <input
+                          type="text"
+                          placeholder="Your name"
+                          value={name}
+                          onChange={(e) => { setName(e.target.value); setError(""); }}
+                          className="rounded-lg border border-border bg-muted px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <label className="text-sm font-medium">Email</label>
+                        <input
+                          type="email"
+                          placeholder="you@example.com"
+                          value={email}
+                          onChange={(e) => { setEmail(e.target.value); setError(""); }}
+                          className="rounded-lg border border-border bg-muted px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary"
+                        />
+                      </div>
 
-                      {error && <p className="text-xs text-red-500">{error}</p>}
+                      {error && <p className="text-sm text-red-500">{error}</p>}
 
                       <button
                         type="submit"
                         disabled={loading}
-                        className="rounded-lg py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+                        className="mt-1 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
                         style={{ background: "hsl(var(--purple))" }}
                       >
-                        {loading
-                          ? "..."
-                          : tab === "community"
-                          ? "Get Slack Invite"
-                          : "Join Waitlist"}
+                        {loading ? "..." : tab === "community" ? "Get Slack Invite" : "Join Waitlist"}
                       </button>
                     </motion.form>
                   )}

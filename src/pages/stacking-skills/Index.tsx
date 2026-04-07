@@ -15,6 +15,7 @@ const COMMUNITY_PERKS = [
   { label: "#ai-tools", sub: "Prompts, Cursor workflows, and Claude setups that actually save hours" },
   { label: "#job-hunt", sub: "Resume reviews, referrals, live job postings, and interview prep" },
   { label: "#code-review", sub: "Drop your code, get honest feedback — no gatekeeping" },
+  { label: "1:1 Mentorship Sessions", sub: "Book paid sessions directly with Tyler for resume reviews, career advice, or code walkthroughs" },
 ];
 
 const PREMIUM_PERKS = [
@@ -22,6 +23,7 @@ const PREMIUM_PERKS = [
   { label: "Founding Member Pricing", sub: "Lock in your price forever — never pays more as we grow", highlight: true },
   { label: "Exclusive Courses", sub: "AI-native development, breaking into fintech, portfolio frameworks that land interviews", highlight: true },
   { label: "Priority 1:1 Advice", sub: "Jump the queue — your questions get answered first, every time", highlight: true },
+  { label: "Discounted Mentorship Sessions", sub: "Book 1:1 sessions with Tyler at a reduced rate — exclusive to Premium members", highlight: true },
 ];
 
 const StackingSkills = () => {

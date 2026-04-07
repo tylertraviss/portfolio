@@ -113,7 +113,7 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
             : { background: "hsl(var(--purple))", color: "white" }
         }
       >
-        {loading ? "..." : tier === "community" ? "Get Slack Invite" : "Reserve Founding Spot"}
+        {loading ? "..." : tier === "community" ? "Join our Community" : "Reserve Founding Spot"}
       </button>
     </form>
   );

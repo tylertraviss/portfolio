@@ -109,7 +109,7 @@ const StackingSkills = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-              className="w-full md:w-[360px] shrink-0"
+              className="w-full md:w-[440px] shrink-0"
             >
               <div className="rounded-2xl bg-background shadow-xl p-8">
                 {/* Toggle */}
@@ -129,6 +129,52 @@ const StackingSkills = () => {
                     </button>
                   ))}
                 </div>
+
+                {/* What's included */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`perks-${tab}`}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.2 }}
+                    className="mb-6"
+                  >
+                    {tab === "community" ? (
+                      <ul className="space-y-2">
+                        {[
+                          "Access to the Slack community",
+                          "#ai-tools — prompts & workflows that save time",
+                          "#job-hunt — resume reviews & referrals",
+                          "#code-review — real feedback on your code",
+                          "#show-and-tell — share what you're building",
+                          "#general-chat — daily conversation & support",
+                        ].map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground">
+                            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "hsl(var(--purple))" }} />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <ul className="space-y-2">
+                        {[
+                          "Everything in Community",
+                          "Premium courses — AI-native development",
+                          "Breaking into fintech — the full playbook",
+                          "Portfolio & resume frameworks that land interviews",
+                          "Founding member pricing — locked in at launch",
+                          "Direct access to Tyler for questions",
+                        ].map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground">
+                            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "hsl(var(--purple))" }} />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
 
                 <AnimatePresence mode="wait">
                   {submitted ? (

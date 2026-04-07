@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { revealVariants, staggerContainer } from "@/hooks/useTextReveal";
 
 const experiences = [
@@ -42,6 +43,8 @@ const experiences = [
 ];
 
 const ExperienceSection = () => {
+  const [active, setActive] = useState(0);
+
   return (
     <section className="section-padding border-t border-border" id="experience">
       <motion.div
@@ -59,34 +62,86 @@ const ExperienceSection = () => {
           Experience
         </motion.p>
 
-        <div>
-          {experiences.map((exp, i) => (
-            <motion.div
-              key={i}
-              variants={revealVariants}
-              custom={i * 0.1}
-              className="group grid gap-6 border-t border-border py-10 md:grid-cols-[1fr_3fr]"
-            >
-              <div>
-                <p className="text-xs uppercase tracking-widest text-muted-foreground">{exp.period}</p>
-              </div>
-              <div>
-                <h3 className="mb-1 text-2xl font-bold text-foreground md:text-3xl">
+        <motion.div
+          variants={revealVariants}
+          custom={0.1}
+          className="grid gap-12 md:grid-cols-[200px_1fr] md:gap-16"
+        >
+          {/* Left: company selector */}
+          <div className="flex flex-row gap-4 overflow-x-auto md:flex-col md:gap-0 md:overflow-visible">
+            {experiences.map((exp, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                className="group relative flex-shrink-0 py-4 text-left md:border-t md:border-border"
+              >
+                {/* Active indicator */}
+                <span
+                  className={`absolute left-0 top-0 hidden h-full w-px bg-foreground transition-opacity md:block ${
+                    active === i ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+                <span
+                  className={`absolute bottom-0 left-0 h-px w-full bg-foreground transition-opacity md:hidden ${
+                    active === i ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+
+                <p
+                  className={`pl-0 text-sm font-medium transition-colors md:pl-4 ${
+                    active === i
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
                   {exp.company}
+                </p>
+                <p className={`pl-0 text-xs transition-colors md:pl-4 ${
+                  active === i ? "text-muted-foreground" : "text-muted-foreground/40"
+                }`}>
+                  {exp.period}
+                </p>
+              </button>
+            ))}
+          </div>
+
+          {/* Right: detail panel */}
+          <div className="relative min-h-[200px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <p className="mb-1 text-xs uppercase tracking-widest text-muted-foreground">
+                  {experiences[active].period}
+                </p>
+                <h3 className="mb-1 text-3xl font-black tracking-tight text-foreground md:text-4xl">
+                  {experiences[active].company}
                 </h3>
-                <p className="mb-5 text-sm text-muted-foreground">{exp.title}</p>
-                <ul className="space-y-2">
-                  {exp.bullets.map((b, j) => (
-                    <li key={j} className="text-sm leading-relaxed text-muted-foreground">
+                <p className="mb-8 text-sm text-muted-foreground">
+                  {experiences[active].title}
+                </p>
+                <ul className="space-y-3">
+                  {experiences[active].bullets.map((b, j) => (
+                    <motion.li
+                      key={j}
+                      initial={{ opacity: 0, x: 10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: j * 0.07 }}
+                      className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
+                    >
+                      <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-muted-foreground/40" />
                       {b}
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
-              </div>
-            </motion.div>
-          ))}
-          <div className="border-t border-border" />
-        </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   );

@@ -123,9 +123,7 @@ const Shipyard = () => {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
             className="mb-6 text-[clamp(3rem,8vw,7rem)] font-black leading-[0.95] tracking-tighter text-foreground"
           >
-            Ship
-            <br />
-            <span style={{ color: "hsl(var(--purple))" }}>Yard.</span>
+            <span style={{ color: "hsl(var(--purple))" }}>Shipyard.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}

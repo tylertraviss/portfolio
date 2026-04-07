@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { revealVariants, staggerContainer } from "@/hooks/useTextReveal";
+import { ArrowLeft } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 const SLACK_INVITE_URL = "https://join.slack.com/t/your-workspace/shared_invite/your-link";
@@ -239,76 +238,6 @@ const StackingSkills = () => {
         >
           <div className="h-px w-12 bg-border" />
           <span className="text-xs uppercase tracking-widest text-muted-foreground">Scroll</span>
-        </motion.div>
-      </section>
-
-      {/* Tier cards */}
-      <section className="border-t border-border px-6 py-24 md:px-12 lg:px-24 xl:px-32">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          className="mx-auto max-w-5xl"
-        >
-          <div className="grid gap-0 md:grid-cols-2">
-            {/* Community */}
-            <motion.div
-              variants={revealVariants}
-              custom={0}
-              className="border border-border p-10 transition-colors hover:border-foreground"
-            >
-              <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                Open to All
-              </p>
-              <div className="mb-4 flex items-center gap-3">
-                <h2 className="text-3xl font-black tracking-tight text-foreground">Community</h2>
-                <span className="rounded-full border px-3 py-1 text-xs font-medium" style={{ borderColor: "hsl(var(--purple))", color: "hsl(var(--purple))", background: "hsl(var(--purple-muted))" }}>
-                  Free
-                </span>
-              </div>
-              <p className="mb-8 text-sm leading-relaxed text-muted-foreground">
-                Connect with software engineers, share what you're building, get feedback, and grow alongside people on the same path.
-              </p>
-              <Link
-                to="/stacking-skills/community"
-                className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-widest transition-colors"
-                style={{ color: "hsl(var(--purple))" }}
-              >
-                Join for free <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </motion.div>
-
-            {/* Premium */}
-            <motion.div
-              variants={revealVariants}
-              custom={0.1}
-              className="border border-l-0 border-border p-10 transition-colors hover:border-foreground"
-              style={{ borderLeftColor: "transparent" }}
-            >
-              <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                For Members
-              </p>
-              <div className="mb-4 flex items-center gap-3">
-                <h2 className="text-3xl font-black tracking-tight text-foreground">Premium</h2>
-                <span
-                  className="rounded-full px-3 py-1 text-xs font-medium text-white"
-                  style={{ background: "hsl(var(--purple))" }}
-                >
-                  Coming Soon
-                </span>
-              </div>
-              <p className="mb-8 text-sm leading-relaxed text-muted-foreground">
-                Courses, frameworks, and resources built specifically for software engineers who want to build faster with AI tools.
-              </p>
-              <Link
-                to="/stacking-skills/premium"
-                className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Join waitlist <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </motion.div>
-          </div>
         </motion.div>
       </section>
 

@@ -15,9 +15,7 @@ const COMMUNITY_PERKS = [
 
 const PREMIUM_PERKS = [
   { label: "Everything in Community", sub: "Full Slack, blog posts, direct line to Tyler" },
-  { label: "Founding Member Pricing", sub: "Lock in your rate forever — never pays more as we grow" },
   { label: "Exclusive Courses", sub: "AI-native dev, fintech playbook, portfolio frameworks that land interviews" },
-  { label: "Priority 1:1 Advice", sub: "Your questions get answered first, every time" },
   { label: "Discounted Mentorship", sub: "1:1 sessions at a reduced rate — exclusive to Premium" },
 ];
 
@@ -182,7 +180,7 @@ const StackingSkills = () => {
       {/* Cards */}
       <section className="px-6 pb-24 md:px-12 lg:px-24 xl:px-32">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2 md:items-stretch">
 
             {/* Community card */}
             <motion.div

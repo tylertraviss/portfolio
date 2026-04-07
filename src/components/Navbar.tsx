@@ -4,9 +4,9 @@ import { track } from "@vercel/analytics/react";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
 

@@ -46,6 +46,10 @@
     --sidebar-ring: 0 0% 8%;
 
     --font-sans: 'Inter', system-ui, sans-serif;
+
+    --purple: 262 83% 58%;
+    --purple-foreground: 0 0% 100%;
+    --purple-muted: 262 60% 96%;
   }
 }
 

@@ -103,13 +103,11 @@ const MemberLoginModal = ({ onClose }: { onClose: () => void }) => {
     if (!name.trim() || !email.trim()) { setError("Name and email are required."); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError("Please enter a valid email."); return; }
     setLoading(true);
-    const { data, error: dbError } = await supabase
-      .from("email_gate_submissions")
-      .select("id")
-      .ilike("email", email.trim())
-      .maybeSingle();
+    const { data, error: fnError } = await supabase.functions.invoke("check-member", {
+      body: { email: email.trim() },
+    });
     setLoading(false);
-    if (dbError || !data) {
+    if (fnError || !data?.found) {
       setError("We couldn't find that email. Make sure you've joined as a member.");
       return;
     }

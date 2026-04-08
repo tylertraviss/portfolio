@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Check, Lock, Zap } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
+import { ArrowLeft, Check, Lock, Zap, X } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-
-const SLACK_INVITE_URL = "https://join.slack.com/t/stackingskillsgroup/shared_invite/zt-3uolq13is-C1OiGgoT0fszRl8XIqm5jA";
 
 const COMMUNITY_PERKS = [
   { label: "Slack Community Access", sub: "6 channels: #ai-tools, #job-hunt, #code-review, #show-and-tell, #general-chat, #wins" },
@@ -25,12 +23,16 @@ interface TierFormProps {
 }
 
 const TierForm = ({ tier, dark }: TierFormProps) => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [isReturning, setIsReturning] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const onSuccess = () => {
+    sessionStorage.setItem("shipyard_tier", tier);
+    navigate(`/shipyard/${tier}/success`);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,14 +41,14 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
     setLoading(true);
     const { error: dbError } = await supabase
       .from("email_gate_submissions")
-      .insert({ name: name.trim(), email: email.trim(), page: `/stacking-skills/${tier}`, tier });
+      .insert({ name: name.trim(), email: email.trim(), page: `/shipyard/${tier}`, tier });
     setLoading(false);
     if (dbError) {
-      if (dbError.code === "23505") { setIsReturning(true); setSubmitted(true); return; }
+      if (dbError.code === "23505") { onSuccess(); return; }
       setError("Something went wrong. Please try again.");
       return;
     }
-    setSubmitted(true);
+    onSuccess();
   };
 
   const inputClass = `rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2 transition-colors ${
@@ -57,35 +59,6 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
 
   const labelClass = `text-sm font-medium ${dark ? "text-white/70" : "text-foreground"}`;
   const errorClass = `text-sm ${dark ? "text-red-300" : "text-red-500"}`;
-
-  if (submitted) {
-    return (
-      <div className="flex flex-col items-center gap-3 py-2 text-center">
-        {tier === "community" ? (
-          <>
-            <p className={`text-xl font-bold ${dark ? "text-white" : "text-foreground"}`}>
-              {isReturning ? "Welcome back! 👋" : "You're in! 🎉"}
-            </p>
-            <p className={`text-sm ${dark ? "text-white/60" : "text-muted-foreground"}`}>
-              {isReturning ? "Good to see you again." : "Click below to join the Slack."}
-            </p>
-            <a
-              href={SLACK_INVITE_URL} target="_blank" rel="noopener noreferrer"
-              className="mt-1 rounded-lg px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-              style={{ background: "hsl(var(--purple))" }}
-            >
-              Join on Slack
-            </a>
-          </>
-        ) : (
-          <>
-            <p className="text-xl font-bold text-white">{isReturning ? "Already on the list." : "You're on the list! 🚀"}</p>
-            <p className="text-sm text-white/60">{isReturning ? "We'll reach out when Premium launches." : "Founding member pricing locked in."}</p>
-          </>
-        )}
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -119,18 +92,103 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
   );
 };
 
-const StackingSkills = () => {
+const MemberLoginModal = ({ onClose }: { onClose: () => void }) => {
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim()) { setError("Name and email are required."); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError("Please enter a valid email."); return; }
+    setLoading(true);
+    const { data, error: fnError } = await supabase.functions.invoke("check-member", {
+      body: { email: email.trim() },
+    });
+    setLoading(false);
+    if (fnError || !data?.found) {
+      setError("We couldn't find that email. Make sure you've joined as a member.");
+      return;
+    }
+    sessionStorage.setItem("shipyard_tier", data.tier ?? "community");
+    navigate("/shipyard/dashboard");
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 10 }}
+        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full max-w-sm rounded-2xl border border-border bg-background p-8 shadow-2xl"
+      >
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <X className="h-4 w-4" />
+        </button>
+        <p className="mb-1 text-xs font-medium uppercase tracking-widest text-muted-foreground">Member Access</p>
+        <h2 className="mb-1 text-2xl font-black tracking-tight text-foreground">Welcome back.</h2>
+        <p className="mb-6 text-sm text-muted-foreground">Enter the name and email you signed up with.</p>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-foreground">Name</label>
+            <input
+              type="text" placeholder="Your name" value={name}
+              onChange={(e) => { setName(e.target.value); setError(""); }}
+              className="rounded-lg border border-border bg-muted px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-foreground">Email</label>
+            <input
+              type="email" placeholder="you@example.com" value={email}
+              onChange={(e) => { setEmail(e.target.value); setError(""); }}
+              className="rounded-lg border border-border bg-muted px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+          {error && <p className="text-sm text-red-500">{error}</p>}
+          <button
+            type="submit" disabled={loading}
+            className="mt-1 rounded-lg py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+            style={{ background: "hsl(var(--purple))" }}
+          >
+            {loading ? "Checking..." : "Go to Dashboard"}
+          </button>
+        </form>
+      </motion.div>
+    </div>
+  );
+};
+
+const Shipyard = () => {
+  const [memberModalOpen, setMemberModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
+      <AnimatePresence>
+        {memberModalOpen && <MemberLoginModal onClose={() => setMemberModalOpen(false)} />}
+      </AnimatePresence>
+
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 z-50 px-6 py-5 md:px-12 lg:px-24 xl:px-32"
+        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 py-5 md:px-12 lg:px-24 xl:px-32"
       >
         <Link to="/" className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
           <ArrowLeft className="h-3 w-3" /> Tyler Travis
         </Link>
+        <button
+          onClick={() => setMemberModalOpen(true)}
+          className="text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Already a member?
+        </button>
       </motion.div>
 
       {/* Hero */}
@@ -141,16 +199,14 @@ const StackingSkills = () => {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground"
           >
-            A community for software engineers
+            A platform for software engineers
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
             className="mb-6 text-[clamp(3rem,8vw,7rem)] font-black leading-[0.95] tracking-tighter text-foreground"
           >
-            Stacking
-            <br />
-            <span style={{ color: "hsl(var(--purple))" }}>Skills.</span>
+            Ship<span style={{ color: "hsl(var(--purple))" }}>yard.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -178,7 +234,7 @@ const StackingSkills = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.85 }}
-            className="mt-10"
+            className="mt-10 flex items-center gap-4"
           >
             <a
               href="#plans"
@@ -188,9 +244,15 @@ const StackingSkills = () => {
                 className="relative z-10 rounded-full px-8 py-3"
                 style={{ background: "hsl(var(--purple))" }}
               >
-                View Plans
+                Join Now
               </span>
             </a>
+            <button
+              onClick={() => setMemberModalOpen(true)}
+              className="rounded-full border border-border px-8 py-3 text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+            >
+              Log in
+            </button>
           </motion.div>
         </div>
       </section>
@@ -307,4 +369,4 @@ const StackingSkills = () => {
   );
 };
 
-export default StackingSkills;
+export default Shipyard;

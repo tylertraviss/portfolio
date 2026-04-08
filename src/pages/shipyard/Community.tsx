@@ -6,7 +6,7 @@ import { supabase } from "@/lib/supabase";
 import { revealVariants, staggerContainer } from "@/hooks/useTextReveal";
 
 // Replace with your actual never-expiring Slack invite link
-const SLACK_INVITE_URL = "https://join.slack.com/t/stackingskillsgroup/shared_invite/zt-3uolq13is-C1OiGgoT0fszRl8XIqm5jA";
+const SLACK_INVITE_URL = "https://join.slack.com/t/shipyard-tech/shared_invite/zt-3uolq13is-C1OiGgoT0fszRl8XIqm5jA";
 
 const Community = () => {
   const [name, setName] = useState("");
@@ -30,7 +30,7 @@ const Community = () => {
     setLoading(true);
     const { error: dbError } = await supabase
       .from("email_gate_submissions")
-      .insert({ name: name.trim(), email: email.trim(), page: "/stacking-skills/community", tier: "community" });
+      .insert({ name: name.trim(), email: email.trim(), page: "/shipyard/community", tier: "community" });
 
     setLoading(false);
 
@@ -72,10 +72,10 @@ const Community = () => {
         >
           <motion.div variants={revealVariants} custom={0}>
             <Link
-              to="/stacking-skills"
+              to="/shipyard"
               className="mb-12 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
             >
-              <ArrowLeft className="h-3 w-3" /> Stacking Skills
+              <ArrowLeft className="h-3 w-3" /> Shipyard
             </Link>
           </motion.div>
 

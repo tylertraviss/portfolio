@@ -46,7 +46,7 @@ const Premium = () => {
     setLoading(true);
     const { error: dbError } = await supabase
       .from("email_gate_submissions")
-      .insert({ name: name.trim(), email: email.trim(), page: "/stacking-skills/premium", tier: "premium" });
+      .insert({ name: name.trim(), email: email.trim(), page: "/shipyard/premium", tier: "premium" });
 
     setLoading(false);
 
@@ -88,10 +88,10 @@ const Premium = () => {
         >
           <motion.div variants={revealVariants} custom={0}>
             <Link
-              to="/stacking-skills"
+              to="/shipyard"
               className="mb-12 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
             >
-              <ArrowLeft className="h-3 w-3" /> Stacking Skills
+              <ArrowLeft className="h-3 w-3" /> Shipyard
             </Link>
           </motion.div>
 

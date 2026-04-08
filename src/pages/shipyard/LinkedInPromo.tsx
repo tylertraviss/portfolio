@@ -13,12 +13,16 @@ const LinkedInPromo = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim()) { setError("Name and email are required."); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError("Please enter a valid email."); return; }
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim().toLowerCase();
+    if (!trimmedName || !trimmedEmail) { setError("Name and email are required."); return; }
+    if (trimmedName.length > 100) { setError("Name is too long."); return; }
+    if (trimmedEmail.length > 254) { setError("Email is too long."); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) { setError("Please enter a valid email."); return; }
     setLoading(true);
     const { error: dbError } = await supabase
       .from("email_gate_submissions")
-      .insert({ name: name.trim(), email: email.trim(), page: "/shipyard/linkedin-promo", tier: "premium" });
+      .insert({ name: trimmedName, email: trimmedEmail, page: "/shipyard/linkedin-promo", tier: "premium" });
     setLoading(false);
     if (dbError) {
       setError("Something went wrong. Please try again.");

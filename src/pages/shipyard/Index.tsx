@@ -36,15 +36,27 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim()) { setError("Name and email are required."); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError("Please enter a valid email."); return; }
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim().toLowerCase();
+    if (!trimmedName || !trimmedEmail) { setError("Name and email are required."); return; }
+    if (trimmedName.length > 100) { setError("Name is too long."); return; }
+    if (trimmedEmail.length > 254) { setError("Email is too long."); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) { setError("Please enter a valid email."); return; }
     setLoading(true);
     const { error: dbError } = await supabase
       .from("email_gate_submissions")
-      .insert({ name: name.trim(), email: email.trim(), page: `/shipyard/${tier}`, tier });
+      .insert({ name: trimmedName, email: trimmedEmail, page: `/shipyard/${tier}`, tier });
     setLoading(false);
     if (dbError) {
-      if (dbError.code === "23505") { onSuccess(); return; }
+      if (dbError.code === "23505") {
+        // Already signed up — look up their actual tier rather than assuming
+        const { data: fnData } = await supabase.functions.invoke("check-member", {
+          body: { email: trimmedEmail },
+        });
+        sessionStorage.setItem("shipyard_tier", fnData?.tier ?? tier);
+        onSuccess();
+        return;
+      }
       setError("Something went wrong. Please try again.");
       return;
     }

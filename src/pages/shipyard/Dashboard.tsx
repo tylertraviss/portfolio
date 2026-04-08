@@ -286,23 +286,26 @@ const PremiumDashboard = () => (
           className="h-24 w-24 shrink-0 rounded-2xl object-cover md:h-32 md:w-32"
         />
         <div className="flex-1">
-          <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold text-white" style={{ background: "hsl(var(--purple))" }}>
-            Premium Exclusive
-          </span>
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold text-white" style={{ background: "hsl(var(--purple))" }}>
+              Premium Exclusive
+            </span>
+            <span className="rounded-full border border-white/20 px-2.5 py-0.5 text-xs font-semibold text-white/50">
+              Coming Soon
+            </span>
+          </div>
           <h3 className="mt-3 text-2xl font-black tracking-tight text-white">Discounted 1:1 Session</h3>
           <p className="mt-2 text-sm leading-relaxed text-white/60">
             Book time with Tyler directly. Resume reviews, system design walkthroughs, career advice, or code reviews — at a rate exclusive to Premium members.
           </p>
-          <a
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          <button
+            disabled
+            className="mt-5 inline-flex cursor-not-allowed items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white/40 opacity-40"
             style={{ background: "hsl(var(--purple))" }}
           >
             <Calendar className="h-4 w-4" />
             Book a Session
-          </a>
+          </button>
         </div>
       </div>
     </motion.div>
@@ -349,16 +352,14 @@ const CommunityDashboard = () => (
             upgrade to Premium for a discounted rate.
           </Link>
         </p>
-        <a
-          href={CALENDLY_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        <button
+          disabled
+          className="inline-flex cursor-not-allowed items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white opacity-40"
           style={{ background: "hsl(var(--purple))" }}
         >
           <Calendar className="h-4 w-4" />
           Book a Session
-        </a>
+        </button>
       </div>
     </motion.div>
 

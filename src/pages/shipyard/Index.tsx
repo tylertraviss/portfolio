@@ -5,16 +5,16 @@ import { ArrowLeft, Check, Lock, Zap, X } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 const COMMUNITY_PERKS = [
-  { label: "Slack Community Access", sub: "6 channels: #ai-tools, #job-hunt, #code-review, #show-and-tell, #general-chat, #wins" },
-  { label: "Weekly Blog Posts", sub: "AI tooling, fintech engineering, and breaking into the industry" },
-  { label: "Direct Line to Tyler", sub: "Ask questions and get responses from someone in the field" },
-  { label: "Paid 1:1 Mentorship", sub: "Book sessions for resume reviews, career advice, or code walkthroughs" },
+  { label: "Slack Community Access", sub: "6 channels: #ai-tools, #job-hunt, #code-review, #show-and-tell, #general-chat, #wins", disabled: false },
+  { label: "Blog Posts", sub: "AI tooling, fintech engineering, and breaking into the industry", disabled: false },
+  { label: "Direct Line to Tyler", sub: "Ask questions and get responses from someone in the field", disabled: false },
+  { label: "1:1 Mentorship", sub: "Book sessions for resume reviews, career advice, or code walkthroughs — $150.00 + tax", disabled: true },
 ];
 
 const PREMIUM_PERKS = [
-  { label: "Everything in Community", sub: "Full Slack, blog posts, direct line to Tyler" },
-  { label: "Exclusive Courses", sub: "AI-native dev, fintech playbook, portfolio frameworks that land interviews" },
-  { label: "Discounted Mentorship", sub: "1:1 sessions at a reduced rate — exclusive to Premium" },
+  { label: "Everything in Community", sub: "Full Slack, blog posts, direct line to Tyler", disabled: false },
+  { label: "Exclusive Courses", sub: "AI-native dev, fintech playbook, portfolio frameworks that land interviews", disabled: false },
+  { label: "Discounted 1:1 Mentorship", sub: "1:1 sessions at a reduced rate — exclusive to Premium", disabled: true },
 ];
 
 interface TierFormProps {
@@ -36,15 +36,27 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim()) { setError("Name and email are required."); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError("Please enter a valid email."); return; }
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim().toLowerCase();
+    if (!trimmedName || !trimmedEmail) { setError("Name and email are required."); return; }
+    if (trimmedName.length > 100) { setError("Name is too long."); return; }
+    if (trimmedEmail.length > 254) { setError("Email is too long."); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) { setError("Please enter a valid email."); return; }
     setLoading(true);
     const { error: dbError } = await supabase
       .from("email_gate_submissions")
-      .insert({ name: name.trim(), email: email.trim(), page: `/shipyard/${tier}`, tier });
+      .insert({ name: trimmedName, email: trimmedEmail, page: `/shipyard/${tier}`, tier });
     setLoading(false);
     if (dbError) {
-      if (dbError.code === "23505") { onSuccess(); return; }
+      if (dbError.code === "23505") {
+        // Already signed up — look up their actual tier rather than assuming
+        const { data: fnData } = await supabase.functions.invoke("check-member", {
+          body: { email: trimmedEmail },
+        });
+        sessionStorage.setItem("shipyard_tier", fnData?.tier ?? tier);
+        onSuccess();
+        return;
+      }
       setError("Something went wrong. Please try again.");
       return;
     }
@@ -281,9 +293,12 @@ const Shipyard = () => {
 
               <ul className="mb-8 flex-1 space-y-4">
                 {COMMUNITY_PERKS.map((perk) => (
-                  <li key={perk.label} className="flex items-start gap-3">
+                  <li key={perk.label} className={`flex items-start gap-3 ${perk.disabled ? "opacity-40" : ""}`}>
                     <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full" style={{ background: "hsl(var(--purple-muted))" }}>
-                      <Check className="h-3 w-3" style={{ color: "hsl(var(--purple))" }} />
+                      {perk.disabled
+                        ? <Lock className="h-2.5 w-2.5" style={{ color: "hsl(var(--purple))" }} />
+                        : <Check className="h-3 w-3" style={{ color: "hsl(var(--purple))" }} />
+                      }
                     </span>
                     <div>
                       <p className="text-sm font-medium text-foreground">{perk.label}</p>
@@ -329,15 +344,15 @@ const Shipyard = () => {
               </div>
 
               <ul className="relative mb-8 flex-1 space-y-4">
-                {PREMIUM_PERKS.map((perk, i) => (
-                  <li key={perk.label} className="flex items-start gap-3">
+                {PREMIUM_PERKS.map((perk) => (
+                  <li key={perk.label} className={`flex items-start gap-3 ${perk.disabled ? "opacity-40" : ""}`}>
                     <span
                       className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
-                      style={{ background: i === 0 ? "rgba(255,255,255,0.1)" : "hsl(var(--purple))" }}
+                      style={{ background: perk.disabled ? "rgba(255,255,255,0.1)" : "hsl(var(--purple))" }}
                     >
-                      {i === 0
-                        ? <Check className="h-3 w-3 text-white/60" />
-                        : <Lock className="h-2.5 w-2.5 text-white" />
+                      {perk.disabled
+                        ? <Lock className="h-2.5 w-2.5 text-white/60" />
+                        : <Check className="h-3 w-3 text-white" />
                       }
                     </span>
                     <div>

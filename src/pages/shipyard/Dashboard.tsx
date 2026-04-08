@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Lock, BookOpen, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, Lock, BookOpen, ChevronDown, ChevronUp, Video } from "lucide-react";
 import { useState } from "react";
 
 const COURSES = [
@@ -8,7 +8,7 @@ const COURSES = [
     id: "social-software-engineer",
     title: "The Social Software Engineer",
     sub: "Your code gets you hired once. Your network gets you hired for life.",
-    status: "coming_soon",
+    videos: 8,
     modules: [
       { title: "Why Engineers Underestimate Visibility", desc: "The invisible tax of being quietly brilliant — and how to fix it." },
       { title: "Building a Personal Brand Without Cringe", desc: "Authentic positioning for engineers who hate self-promotion." },
@@ -21,7 +21,7 @@ const COURSES = [
     id: "rethinking-system-design",
     title: "Rethinking System Design",
     sub: "Stop memorizing architectures. Start thinking in trade-offs.",
-    status: "coming_soon",
+    videos: 10,
     modules: [
       { title: "The Trade-Off Mindset", desc: "Every design decision is a negotiation between consistency, availability, and cost." },
       { title: "Designing for Failure First", desc: "Resilience patterns, graceful degradation, and why happy paths are a trap." },
@@ -34,7 +34,7 @@ const COURSES = [
     id: "ai-native-developer",
     title: "The AI-Native Developer",
     sub: "Using Claude, Cursor, and modern tooling to 10× your output — without losing your craft.",
-    status: "coming_soon",
+    videos: 12,
     modules: [
       { title: "The Shift From Coder to Orchestrator", desc: "How to think in prompts, agents, and pipelines instead of lines of code." },
       { title: "Claude as a Coding Partner", desc: "Prompt patterns, context strategies, and getting production-ready output." },
@@ -47,7 +47,7 @@ const COURSES = [
     id: "fintech-playbook",
     title: "The Fintech Playbook",
     sub: "Engineering money — compliance, precision, and the hidden rules of financial software.",
-    status: "coming_soon",
+    videos: 9,
     modules: [
       { title: "Money Is Not a Float", desc: "Decimal precision, rounding rules, and why financial bugs are career-ending." },
       { title: "Compliance Without a Law Degree", desc: "What engineers actually need to know about PCI, SOC 2, and audit trails." },
@@ -60,7 +60,7 @@ const COURSES = [
     id: "portfolio-frameworks",
     title: "Portfolio Frameworks That Land Interviews",
     sub: "Most portfolios look identical. Here's how to build one that gets callbacks.",
-    status: "coming_soon",
+    videos: 7,
     modules: [
       { title: "The Signal Problem", desc: "Why most portfolios fail to communicate seniority — and what hiring managers actually scan for." },
       { title: "Project Selection Strategy", desc: "Choosing work that shows breadth, depth, and business impact — not just syntax." },
@@ -79,21 +79,28 @@ const CourseCard = ({ course, index }: { course: typeof COURSES[0]; index: numbe
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 + index * 0.08 }}
-      className="rounded-2xl border border-border bg-background overflow-hidden"
+      className="flex flex-col rounded-2xl border border-border bg-background overflow-hidden"
     >
-      <div className="p-6">
-        <div className="mb-3 flex items-start justify-between gap-4">
+      <div className="flex flex-1 flex-col p-6">
+        {/* Top row */}
+        <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
-            <div className="mb-1 flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <span
                 className="rounded-full px-2.5 py-0.5 text-xs font-semibold"
                 style={{ background: "hsl(var(--purple-muted))", color: "hsl(var(--purple))" }}
               >
                 Coming Soon
               </span>
+              <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Video className="h-3 w-3" />
+                {course.videos} videos
+              </span>
+              <span className="text-xs text-muted-foreground">·</span>
+              <span className="text-xs text-muted-foreground">{course.modules.length} modules</span>
             </div>
-            <h3 className="mt-2 text-lg font-black tracking-tight text-foreground">{course.title}</h3>
-            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{course.sub}</p>
+            <h3 className="mt-3 text-xl font-black tracking-tight text-foreground">{course.title}</h3>
+            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{course.sub}</p>
           </div>
           <span className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border">
             <Lock className="h-4 w-4 text-muted-foreground" />
@@ -102,7 +109,7 @@ const CourseCard = ({ course, index }: { course: typeof COURSES[0]; index: numbe
 
         <button
           onClick={() => setOpen((o) => !o)}
-          className="mt-4 flex items-center gap-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+          className="mt-5 flex items-center gap-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
         >
           <BookOpen className="h-3 w-3" />
           {open ? "Hide" : "Preview"} Curriculum
@@ -140,7 +147,6 @@ const CourseCard = ({ course, index }: { course: typeof COURSES[0]; index: numbe
 const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Back nav */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -156,7 +162,7 @@ const Dashboard = () => {
       </motion.div>
 
       <div className="px-6 pb-24 pt-28 md:px-12 lg:px-24 xl:px-32">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-6xl">
 
           {/* Header */}
           <motion.p
@@ -181,14 +187,13 @@ const Dashboard = () => {
             Courses are being built for Shipyard members. Preview the curriculum below — founding members get first access when each drops.
           </motion.p>
 
-          {/* Course cards */}
-          <div className="flex flex-col gap-4">
+          {/* Course grid */}
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {COURSES.map((course, i) => (
               <CourseCard key={course.id} course={course} index={i} />
             ))}
           </div>
 
-          {/* Footer note */}
           <motion.p
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.9 }}

@@ -17,10 +17,15 @@ const BLOG_POSTS = [
     href: "/ai-architect-roadmap-2026",
     internal: true,
   },
+  {
+    title: "How Software Is Actually Built",
+    sub: "From idea to scalable system — what nobody teaches you in tutorials.",
+    href: "/how-software-is-actually-built",
+    internal: true,
+  },
 ];
 
 const SLACK_INVITE_URL = "https://join.slack.com/t/shipyard-tech/shared_invite/zt-3uolq13is-C1OiGgoT0fszRl8XIqm5jA";
-const CALENDLY_URL = "https://calendly.com/tylertravis";
 
 const COURSES = [
   {

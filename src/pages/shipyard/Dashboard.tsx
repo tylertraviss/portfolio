@@ -364,27 +364,25 @@ const CommunityDashboard = () => (
       />
       <div className="flex-1">
         <h3 className="text-xl font-black tracking-tight text-foreground">Book a 1:1 Session</h3>
-        <p className="mt-1.5 mb-5 text-sm leading-relaxed text-muted-foreground">
-          Resume review, career advice, or a code walkthrough with Tyler directly. Available to all members.
+        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+          Resume review, career advice, or a code walkthrough with Tyler directly.
         </p>
-        <div className="flex flex-wrap items-center gap-4">
-          <a
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-            style={{ background: "hsl(var(--purple))" }}
-          >
-            <Calendar className="h-4 w-4" />
-            Book a Session
-          </a>
-          <Link
-            to="/shipyard"
-            className="text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Upgrade to Premium →
+        <p className="mt-1 mb-5 text-sm text-muted-foreground">
+          Community members pay full rate —{" "}
+          <Link to="/shipyard" style={{ color: "hsl(var(--purple))" }} className="font-medium underline underline-offset-2 transition-opacity hover:opacity-80">
+            upgrade to Premium for a discounted rate.
           </Link>
-        </div>
+        </p>
+        <a
+          href={CALENDLY_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          style={{ background: "hsl(var(--purple))" }}
+        >
+          <Calendar className="h-4 w-4" />
+          Book a Session
+        </a>
       </div>
     </motion.div>
 

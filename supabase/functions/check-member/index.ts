@@ -27,7 +27,7 @@ Deno.serve(async (req) => {
 
     const { data, error } = await supabase
       .from("email_gate_submissions")
-      .select("id")
+      .select("id, tier")
       .ilike("email", email.trim())
       .maybeSingle();
 
@@ -38,7 +38,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    return new Response(JSON.stringify({ found: !!data }), {
+    return new Response(JSON.stringify({ found: !!data, tier: data?.tier ?? "community" }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });

@@ -30,6 +30,7 @@ const TierForm = ({ tier, dark }: TierFormProps) => {
   const [loading, setLoading] = useState(false);
 
   const onSuccess = () => {
+    sessionStorage.setItem("shipyard_tier", tier);
     navigate(`/shipyard/${tier}/success`);
   };
 
@@ -111,6 +112,7 @@ const MemberLoginModal = ({ onClose }: { onClose: () => void }) => {
       setError("We couldn't find that email. Make sure you've joined as a member.");
       return;
     }
+    sessionStorage.setItem("shipyard_tier", data.tier ?? "community");
     navigate("/shipyard/dashboard");
   };
 

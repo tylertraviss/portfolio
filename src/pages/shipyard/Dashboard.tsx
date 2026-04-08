@@ -1,7 +1,26 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Lock, BookOpen, ChevronDown, ChevronUp, Video } from "lucide-react";
+import { ArrowLeft, Lock, BookOpen, ChevronDown, ChevronUp, Video, ExternalLink, Calendar } from "lucide-react";
 import { useState } from "react";
+import tylerHeadshot from "@/assets/tyler-headshot.png";
+
+const BLOG_POSTS = [
+  {
+    title: "You're Using Claude Wrong",
+    sub: "Most engineers treat AI like a search engine. Here's what changes when you don't.",
+    href: "/youre-using-claude-wrong",
+    internal: true,
+  },
+  {
+    title: "The AI Architect Roadmap 2026",
+    sub: "A practical breakdown of what it takes to design AI-native systems in the next wave.",
+    href: "/ai-architect-roadmap-2026",
+    internal: true,
+  },
+];
+
+const SLACK_INVITE_URL = "https://join.slack.com/t/shipyard-tech/shared_invite/zt-3uolq13is-C1OiGgoT0fszRl8XIqm5jA";
+const CALENDLY_URL = "https://calendly.com/tylertravis";
 
 const COURSES = [
   {
@@ -136,18 +155,17 @@ const COURSES = [
   },
 ];
 
-const CourseCard = ({ course, index }: { course: typeof COURSES[0]; index: number }) => {
+const CourseCard = ({ course, index, locked }: { course: typeof COURSES[0]; index: number; locked: boolean }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 + index * 0.08 }}
-      className="flex flex-col rounded-2xl border border-border bg-background overflow-hidden"
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 + index * 0.06 }}
+      className={`flex flex-col rounded-2xl border bg-background overflow-hidden ${locked ? "border-border opacity-60" : "border-border"}`}
     >
       <div className="flex flex-1 flex-col p-6">
-        {/* Top row */}
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
             <div className="flex items-center gap-2 flex-wrap">
@@ -164,7 +182,7 @@ const CourseCard = ({ course, index }: { course: typeof COURSES[0]; index: numbe
               <span className="text-xs text-muted-foreground">·</span>
               <span className="text-xs text-muted-foreground">{course.modules.length} modules</span>
             </div>
-            <h3 className="mt-3 text-xl font-black tracking-tight text-foreground">{course.title}</h3>
+            <h3 className="mt-3 text-lg font-black tracking-tight text-foreground">{course.title}</h3>
             <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{course.sub}</p>
           </div>
           <span className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border">
@@ -172,21 +190,22 @@ const CourseCard = ({ course, index }: { course: typeof COURSES[0]; index: numbe
           </span>
         </div>
 
-        <button
-          onClick={() => setOpen((o) => !o)}
-          className="mt-5 flex items-center gap-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <BookOpen className="h-3 w-3" />
-          {open ? "Hide" : "Preview"} Curriculum
-          {open ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
-        </button>
+        {!locked && (
+          <button
+            onClick={() => setOpen((o) => !o)}
+            className="mt-5 flex items-center gap-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <BookOpen className="h-3 w-3" />
+            {open ? "Hide" : "Preview"} Curriculum
+            {open ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+          </button>
+        )}
       </div>
 
-      {open && (
+      {!locked && open && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="border-t border-border"
         >
@@ -209,7 +228,188 @@ const CourseCard = ({ course, index }: { course: typeof COURSES[0]; index: numbe
   );
 };
 
+const BlogSection = () => (
+  <div>
+    <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">Blog Posts</p>
+    <div className="flex flex-col gap-3">
+      {BLOG_POSTS.map((post, i) => (
+        <motion.div
+          key={post.href}
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 + i * 0.07 }}
+        >
+          {post.internal ? (
+            <Link
+              to={post.href}
+              className="group flex items-start justify-between gap-4 rounded-2xl border border-border bg-background p-5 transition-colors hover:border-foreground/20"
+            >
+              <div>
+                <p className="font-semibold text-foreground">{post.title}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{post.sub}</p>
+              </div>
+              <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
+            </Link>
+          ) : (
+            <a
+              href={post.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-start justify-between gap-4 rounded-2xl border border-border bg-background p-5 transition-colors hover:border-foreground/20"
+            >
+              <div>
+                <p className="font-semibold text-foreground">{post.title}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{post.sub}</p>
+              </div>
+              <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
+            </a>
+          )}
+        </motion.div>
+      ))}
+    </div>
+  </div>
+);
+
+const PremiumDashboard = () => (
+  <div className="flex flex-col gap-16">
+    {/* 1:1 Session */}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+      className="relative overflow-hidden rounded-2xl p-8"
+      style={{ background: "hsl(262 50% 12%)" }}
+    >
+      <div className="pointer-events-none absolute -top-16 right-0 h-64 w-64 rounded-full opacity-20 blur-3xl" style={{ background: "hsl(var(--purple))" }} />
+      <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:gap-10">
+        <img
+          src={tylerHeadshot}
+          alt="Tyler Travis"
+          className="h-24 w-24 shrink-0 rounded-2xl object-cover md:h-32 md:w-32"
+        />
+        <div className="flex-1">
+          <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold text-white" style={{ background: "hsl(var(--purple))" }}>
+            Premium Exclusive
+          </span>
+          <h3 className="mt-3 text-2xl font-black tracking-tight text-white">Discounted 1:1 Session</h3>
+          <p className="mt-2 text-sm leading-relaxed text-white/60">
+            Book time with Tyler directly. Resume reviews, system design walkthroughs, career advice, or code reviews — at a rate exclusive to Premium members.
+          </p>
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+            style={{ background: "hsl(var(--purple))" }}
+          >
+            <Calendar className="h-4 w-4" />
+            Book a Session
+          </a>
+        </div>
+      </div>
+    </motion.div>
+
+    {/* Blog posts */}
+    <BlogSection />
+
+    {/* Courses */}
+    <div>
+      <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-foreground">Courses</p>
+      <p className="mb-6 text-sm text-muted-foreground">Coming soon — Premium members get first access when each drops.</p>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {COURSES.map((course, i) => (
+          <CourseCard key={course.id} course={course} index={i} locked={false} />
+        ))}
+      </div>
+      <p className="mt-8 text-center text-xs text-muted-foreground/50">More courses being added. Stay tuned via Slack.</p>
+    </div>
+  </div>
+);
+
+const CommunityDashboard = () => (
+  <div className="flex flex-col gap-16">
+    {/* Slack CTA */}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+      className="rounded-2xl border border-border bg-background p-8"
+    >
+      <p className="mb-1 text-xs font-medium uppercase tracking-widest text-muted-foreground">Community</p>
+      <h3 className="mt-2 text-2xl font-black tracking-tight text-foreground">You're in the Slack.</h3>
+      <p className="mt-2 mb-6 text-sm leading-relaxed text-muted-foreground max-w-lg">
+        Connect with engineers, share what you're building, and get answers from people who've been there. Six channels — #ai-tools, #job-hunt, #code-review, #show-and-tell, #general-chat, and #wins.
+      </p>
+      <a
+        href={SLACK_INVITE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        style={{ background: "hsl(var(--purple))" }}
+      >
+        Open Slack
+      </a>
+    </motion.div>
+
+    {/* Blog posts */}
+    <BlogSection />
+
+    {/* 1:1 CTA — paid, no discount */}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+      className="flex flex-col gap-6 rounded-2xl border border-border bg-background p-8 md:flex-row md:items-center md:gap-10"
+    >
+      <img
+        src={tylerHeadshot}
+        alt="Tyler Travis"
+        className="h-20 w-20 shrink-0 rounded-2xl object-cover"
+      />
+      <div className="flex-1">
+        <h3 className="text-xl font-black tracking-tight text-foreground">Book a 1:1 Session</h3>
+        <p className="mt-1.5 mb-5 text-sm leading-relaxed text-muted-foreground">
+          Resume review, career advice, or a code walkthrough with Tyler directly. Available to all members.
+        </p>
+        <div className="flex flex-wrap items-center gap-4">
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+            style={{ background: "hsl(var(--purple))" }}
+          >
+            <Calendar className="h-4 w-4" />
+            Book a Session
+          </a>
+          <Link
+            to="/shipyard"
+            className="text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Upgrade to Premium →
+          </Link>
+        </div>
+      </div>
+    </motion.div>
+
+    {/* Locked courses teaser */}
+    <div>
+      <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-foreground">Courses</p>
+      <p className="mb-6 text-sm text-muted-foreground">
+        Courses are a Premium feature.{" "}
+        <Link to="/shipyard" className="underline underline-offset-2 transition-colors hover:text-foreground">
+          Upgrade to get first access.
+        </Link>
+      </p>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {COURSES.map((course, i) => (
+          <CourseCard key={course.id} course={course} index={i} locked={true} />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
 const Dashboard = () => {
+  const tier = sessionStorage.getItem("shipyard_tier") ?? "community";
+  const isPremium = tier === "premium";
+
   return (
     <div className="min-h-screen bg-background">
       <motion.div
@@ -228,44 +428,35 @@ const Dashboard = () => {
 
       <div className="px-6 pb-24 pt-28 md:px-12 lg:px-24 xl:px-32">
         <div className="mx-auto max-w-6xl">
-
-          {/* Header */}
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground"
           >
-            Member Dashboard
+            {isPremium ? "Premium Dashboard" : "Community Dashboard"}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="mb-4 text-[clamp(2.5rem,6vw,5rem)] font-black leading-[0.95] tracking-tighter text-foreground"
           >
-            A lot more <span style={{ color: "hsl(var(--purple))" }}>on the way.</span>
+            {isPremium ? (
+              <>A lot more <span style={{ color: "hsl(var(--purple))" }}>on the way.</span></>
+            ) : (
+              <>Welcome to <span style={{ color: "hsl(var(--purple))" }}>Shipyard.</span></>
+            )}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
             className="mb-12 max-w-xl text-base leading-relaxed text-muted-foreground"
           >
-            Courses are being built for Shipyard members. Preview the curriculum below — founding members get first access when each drops.
+            {isPremium
+              ? "You're a founding Premium member. Courses drop here first — plus discounted 1:1 access and everything below."
+              : "You're a Community member. Access the Slack, read the blog, and book a session whenever you're ready."}
           </motion.p>
 
-          {/* Course grid */}
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {COURSES.map((course, i) => (
-              <CourseCard key={course.id} course={course} index={i} />
-            ))}
-          </div>
-
-          <motion.p
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            className="mt-12 text-center text-xs text-muted-foreground/50"
-          >
-            More courses being added. Stay tuned via Slack.
-          </motion.p>
+          {isPremium ? <PremiumDashboard /> : <CommunityDashboard />}
         </div>
       </div>
     </div>

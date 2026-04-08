@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Lock, BookOpen, ChevronDown, ChevronUp, Video, ExternalLink, Calendar } from "lucide-react";
-import { useState } from "react";
+import { ArrowLeft, Lock, BookOpen, ChevronDown, ChevronUp, Video, ExternalLink, Calendar, X } from "lucide-react";
+import { useState, useEffect } from "react";
 import tylerHeadshot from "@/assets/tyler-headshot.png";
 
 const BLOG_POSTS = [
@@ -440,12 +440,53 @@ const CommunityDashboard = () => (
   </div>
 );
 
+const WelcomeBanner = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("shipyard_welcome") === "true") {
+      setVisible(true);
+      sessionStorage.removeItem("shipyard_welcome");
+    }
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -16 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-full max-w-lg px-4"
+        >
+          <div
+            className="flex items-start justify-between gap-4 rounded-2xl px-5 py-4 shadow-2xl"
+            style={{ background: "hsl(262 50% 12%)", border: "1px solid hsl(var(--purple) / 0.3)" }}
+          >
+            <div>
+              <p className="text-sm font-bold text-white">You're in. Welcome to Premium.</p>
+              <p className="mt-0.5 text-xs leading-relaxed text-white/50">
+                Courses and 1:1 sessions are on their way — you'll be first when they drop.
+              </p>
+            </div>
+            <button onClick={() => setVisible(false)} className="mt-0.5 shrink-0 text-white/30 transition-colors hover:text-white/70">
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
 const Dashboard = () => {
   const tier = sessionStorage.getItem("shipyard_tier") ?? "community";
   const isPremium = tier === "premium";
 
   return (
     <div className="min-h-screen bg-background">
+      <WelcomeBanner />
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}

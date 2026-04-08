@@ -13,8 +13,8 @@ const CommunitySuccess = () => {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 z-50 px-6 py-5 md:px-12 lg:px-24 xl:px-32"
       >
-        <Link to="/" className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
-          <ArrowLeft className="h-3 w-3" /> Tyler Travis
+        <Link to="/shipyard" className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground">
+          <ArrowLeft className="h-3 w-3" /> Shipyard
         </Link>
       </motion.div>
 

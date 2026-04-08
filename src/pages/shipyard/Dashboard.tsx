@@ -326,42 +326,13 @@ const PremiumDashboard = () => (
 
 const CommunityDashboard = () => (
   <div className="flex flex-col gap-16">
-    {/* Slack CTA */}
+    {/* 1:1 CTA — top */}
     <motion.div
       initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-      className="rounded-2xl border border-border bg-background p-8"
-    >
-      <p className="mb-1 text-xs font-medium uppercase tracking-widest text-muted-foreground">Community</p>
-      <h3 className="mt-2 text-2xl font-black tracking-tight text-foreground">You're in the Slack.</h3>
-      <p className="mt-2 mb-6 text-sm leading-relaxed text-muted-foreground max-w-lg">
-        Connect with engineers, share what you're building, and get answers from people who've been there. Six channels — #ai-tools, #job-hunt, #code-review, #show-and-tell, #general-chat, and #wins.
-      </p>
-      <a
-        href={SLACK_INVITE_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-        style={{ background: "hsl(var(--purple))" }}
-      >
-        Open Slack
-      </a>
-    </motion.div>
-
-    {/* Blog posts */}
-    <BlogSection />
-
-    {/* 1:1 CTA — paid, no discount */}
-    <motion.div
-      initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
       className="flex flex-col gap-6 rounded-2xl border border-border bg-background p-8 md:flex-row md:items-center md:gap-10"
     >
-      <img
-        src={tylerHeadshot}
-        alt="Tyler Travis"
-        className="h-20 w-20 shrink-0 rounded-2xl object-cover"
-      />
+      <img src={tylerHeadshot} alt="Tyler Travis" className="h-20 w-20 shrink-0 rounded-2xl object-cover" />
       <div className="flex-1">
         <h3 className="text-xl font-black tracking-tight text-foreground">Book a 1:1 Session</h3>
         <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
@@ -383,6 +354,65 @@ const CommunityDashboard = () => (
           <Calendar className="h-4 w-4" />
           Book a Session
         </a>
+      </div>
+    </motion.div>
+
+    {/* Slack + Blog side by side */}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+      className="grid gap-6 md:grid-cols-2"
+    >
+      {/* Slack */}
+      <div className="rounded-2xl border border-border bg-background p-6">
+        <p className="mb-1 text-xs font-medium uppercase tracking-widest text-muted-foreground">Community</p>
+        <h3 className="mt-2 text-xl font-black tracking-tight text-foreground">You're in the Slack.</h3>
+        <p className="mt-2 mb-5 text-sm leading-relaxed text-muted-foreground">
+          #ai-tools, #job-hunt, #code-review, #show-and-tell, #general-chat, and #wins.
+        </p>
+        <a
+          href={SLACK_INVITE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          style={{ background: "hsl(var(--purple))" }}
+        >
+          Open Slack
+        </a>
+      </div>
+
+      {/* Blog posts */}
+      <div className="flex flex-col gap-3">
+        <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Blog Posts</p>
+        {BLOG_POSTS.map((post) => (
+          post.internal ? (
+            <Link
+              key={post.href}
+              to={post.href}
+              className="group flex items-start justify-between gap-4 rounded-2xl border border-border bg-background p-5 transition-colors hover:border-foreground/20"
+            >
+              <div>
+                <p className="font-semibold text-foreground">{post.title}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{post.sub}</p>
+              </div>
+              <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
+            </Link>
+          ) : (
+            <a
+              key={post.href}
+              href={post.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-start justify-between gap-4 rounded-2xl border border-border bg-background p-5 transition-colors hover:border-foreground/20"
+            >
+              <div>
+                <p className="font-semibold text-foreground">{post.title}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{post.sub}</p>
+              </div>
+              <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
+            </a>
+          )
+        ))}
       </div>
     </motion.div>
 

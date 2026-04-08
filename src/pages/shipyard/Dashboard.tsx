@@ -329,60 +329,10 @@ const PremiumDashboard = () => (
 
 const CommunityDashboard = () => (
   <div className="flex flex-col gap-16">
-    {/* 1:1 CTA — top */}
-    <motion.div
-      initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-      className="flex flex-col gap-6 rounded-2xl border border-border bg-background p-8 md:flex-row md:items-center md:gap-10"
-    >
-      <img src={tylerHeadshot} alt="Tyler Travis" className="h-20 w-20 shrink-0 rounded-2xl object-cover" />
-      <div className="flex-1">
-        <div className="flex items-center gap-2 flex-wrap">
-          <h3 className="text-xl font-black tracking-tight text-foreground">Book a 1:1 Session</h3>
-          <span className="rounded-full border px-2.5 py-0.5 text-xs font-semibold" style={{ borderColor: "hsl(var(--purple))", color: "hsl(var(--purple))" }}>
-            Discounted for Premium
-          </span>
-        </div>
-        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-          Resume review, career advice, or a code walkthrough with Tyler directly.
-        </p>
-        <p className="mt-1 mb-5 text-sm text-muted-foreground">
-          Community members pay full rate —{" "}
-          <Link to="/shipyard" style={{ color: "hsl(var(--purple))" }} className="font-medium underline underline-offset-2 transition-opacity hover:opacity-80">
-            upgrade to Premium for a discounted rate.
-          </Link>
-        </p>
-        <button
-          disabled
-          className="inline-flex cursor-not-allowed items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white opacity-40"
-          style={{ background: "hsl(var(--purple))" }}
-        >
-          <Calendar className="h-4 w-4" />
-          Book a Session
-        </button>
-      </div>
-    </motion.div>
-
-    {/* Locked courses teaser */}
-    <div>
-      <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-foreground">Courses</p>
-      <p className="mb-6 text-sm text-muted-foreground">
-        Courses are a Premium feature.{" "}
-        <Link to="/shipyard" className="underline underline-offset-2 transition-colors hover:text-foreground">
-          Upgrade to get first access.
-        </Link>
-      </p>
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {COURSES.map((course, i) => (
-          <CourseCard key={course.id} course={course} index={i} locked={true} />
-        ))}
-      </div>
-    </div>
-
     {/* Slack + Blog side by side */}
     <motion.div
       initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
       className="grid gap-6 md:grid-cols-2"
     >
       {/* Slack */}
@@ -438,6 +388,55 @@ const CommunityDashboard = () => (
       </div>
     </motion.div>
 
+    {/* 1:1 CTA — disabled */}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+      className="flex flex-col gap-6 rounded-2xl border border-border bg-background p-8 opacity-60 md:flex-row md:items-center md:gap-10"
+    >
+      <img src={tylerHeadshot} alt="Tyler Travis" className="h-20 w-20 shrink-0 rounded-2xl object-cover" />
+      <div className="flex-1">
+        <div className="flex items-center gap-2 flex-wrap">
+          <h3 className="text-xl font-black tracking-tight text-foreground">Book a 1:1 Session</h3>
+          <span className="rounded-full border px-2.5 py-0.5 text-xs font-semibold" style={{ borderColor: "hsl(var(--purple))", color: "hsl(var(--purple))" }}>
+            Discounted for Premium
+          </span>
+        </div>
+        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+          Resume review, career advice, or a code walkthrough with Tyler directly.
+        </p>
+        <p className="mt-1 mb-5 text-sm text-muted-foreground">
+          Community members pay full rate —{" "}
+          <Link to="/shipyard" style={{ color: "hsl(var(--purple))" }} className="font-medium underline underline-offset-2 transition-opacity hover:opacity-80">
+            upgrade to Premium for a discounted rate.
+          </Link>
+        </p>
+        <button
+          disabled
+          className="inline-flex cursor-not-allowed items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white opacity-40"
+          style={{ background: "hsl(var(--purple))" }}
+        >
+          <Calendar className="h-4 w-4" />
+          Book a Session
+        </button>
+      </div>
+    </motion.div>
+
+    {/* Locked courses */}
+    <div className="opacity-60">
+      <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-foreground">Courses</p>
+      <p className="mb-6 text-sm text-muted-foreground">
+        Courses are a Premium feature.{" "}
+        <Link to="/shipyard" className="underline underline-offset-2 transition-colors hover:text-foreground">
+          Upgrade to get first access.
+        </Link>
+      </p>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {COURSES.map((course, i) => (
+          <CourseCard key={course.id} course={course} index={i} locked={true} />
+        ))}
+      </div>
+    </div>
   </div>
 );
 

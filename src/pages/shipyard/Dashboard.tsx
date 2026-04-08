@@ -69,6 +69,71 @@ const COURSES = [
       { title: "The Portfolio Review Framework", desc: "A system for auditing your own work before a hiring manager does." },
     ],
   },
+  {
+    id: "from-ic-to-staff",
+    title: "From IC to Staff Engineer",
+    sub: "The promotion nobody prepares you for — and how to navigate it deliberately.",
+    videos: 11,
+    modules: [
+      { title: "What Staff Actually Means", desc: "Why the title varies wildly by company and how to calibrate your expectations." },
+      { title: "Expanding Your Scope Without Burning Out", desc: "Operating across teams without losing ownership of your own work." },
+      { title: "Technical Leadership vs. Management", desc: "The difference between leading people and leading systems — and why both matter." },
+      { title: "Writing Design Docs That Drive Decisions", desc: "How to frame proposals so teams align fast and stakeholders stay informed." },
+      { title: "The Sponsorship Game", desc: "Why mentorship isn't enough — and how to find someone who will fight for you in the room." },
+    ],
+  },
+  {
+    id: "debugging-like-a-senior",
+    title: "Debugging Like a Senior",
+    sub: "Speed isn't the goal. Certainty is.",
+    videos: 9,
+    modules: [
+      { title: "The Mental Model First", desc: "Why the best debuggers form hypotheses before touching the keyboard." },
+      { title: "Reading Stack Traces Without Panic", desc: "Extracting signal from noise in error outputs across languages and runtimes." },
+      { title: "Distributed System Failures Are Different", desc: "How to debug across services, networks, and async boundaries." },
+      { title: "Reproducing the Unreproducible", desc: "Techniques for hunting down race conditions, flaky tests, and prod-only bugs." },
+      { title: "Post-Mortems That Actually Prevent Recurrence", desc: "Writing blameless post-mortems that teams actually read and act on." },
+    ],
+  },
+  {
+    id: "breaking-in-without-a-target-school",
+    title: "Breaking In Without a Target School",
+    sub: "How to compete in a market that was designed to overlook you.",
+    videos: 10,
+    modules: [
+      { title: "The Gatekeeping Is Real — Here's How It Works", desc: "ATS systems, recruiter screens, and the filters you need to know about." },
+      { title: "Building Credibility Without a Brand Name Degree", desc: "Open source, side projects, writing, and the alternatives that actually move the needle." },
+      { title: "Getting a Referral When You Know Nobody", desc: "The cold-to-warm pipeline — turning strangers into advocates." },
+      { title: "Surviving the Technical Screen", desc: "Realistic prep strategy for LeetCode, system design, and take-home projects." },
+      { title: "Negotiating Your First Offer (And Your Third)", desc: "What to say, what not to say, and why the first number is never the last." },
+    ],
+  },
+  {
+    id: "shipping-in-a-legacy-codebase",
+    title: "Shipping in a Legacy Codebase",
+    sub: "Most of the world's code is old. Learn to move fast inside it anyway.",
+    videos: 8,
+    modules: [
+      { title: "Reading Code You Didn't Write", desc: "Techniques for building a mental model of an unfamiliar system quickly." },
+      { title: "The Strangler Fig and Other Safe Refactors", desc: "Patterns for modernizing without rewriting — and without breaking production." },
+      { title: "Testing Without a Test Suite", desc: "How to add coverage incrementally and make legacy code safe to change." },
+      { title: "Managing Technical Debt Without Career Debt", desc: "When to fight for refactor time and how to frame it to non-technical stakeholders." },
+      { title: "Migrating Databases Nobody Wants to Touch", desc: "Zero-downtime migration strategies for schemas that haven't changed in a decade." },
+    ],
+  },
+  {
+    id: "engineering-your-compensation",
+    title: "Engineering Your Compensation",
+    sub: "You optimized the algorithm. Now optimize your paycheck.",
+    videos: 6,
+    modules: [
+      { title: "How Comp Bands Actually Work", desc: "Levels, bands, refresh cliffs, and the numbers your manager doesn't volunteer." },
+      { title: "Timing Your Moves", desc: "When to stay, when to leave, and why the market rewards job-hoppers more than loyalty." },
+      { title: "The Competing Offer Playbook", desc: "How to use competing offers ethically and effectively — without burning bridges." },
+      { title: "Equity 101 for Engineers", desc: "ISOs vs RSUs, cliffs, vesting, strike prices, and what to actually value at a startup." },
+      { title: "Remote, Hybrid, and Location-Based Pay", desc: "Navigating geographic pay adjustments and when to push back." },
+    ],
+  },
 ];
 
 const CourseCard = ({ course, index }: { course: typeof COURSES[0]; index: number }) => {

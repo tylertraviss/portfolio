@@ -244,7 +244,7 @@ const Shipyard = () => {
                 className="relative z-10 rounded-full px-8 py-3"
                 style={{ background: "hsl(var(--purple))" }}
               >
-                View Plans
+                Join Now
               </span>
             </a>
             <button

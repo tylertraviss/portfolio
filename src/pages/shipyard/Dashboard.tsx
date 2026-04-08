@@ -334,7 +334,12 @@ const CommunityDashboard = () => (
     >
       <img src={tylerHeadshot} alt="Tyler Travis" className="h-20 w-20 shrink-0 rounded-2xl object-cover" />
       <div className="flex-1">
-        <h3 className="text-xl font-black tracking-tight text-foreground">Book a 1:1 Session</h3>
+        <div className="flex items-center gap-2 flex-wrap">
+          <h3 className="text-xl font-black tracking-tight text-foreground">Book a 1:1 Session</h3>
+          <span className="rounded-full border px-2.5 py-0.5 text-xs font-semibold" style={{ borderColor: "hsl(var(--purple))", color: "hsl(var(--purple))" }}>
+            Discounted for Premium
+          </span>
+        </div>
         <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
           Resume review, career advice, or a code walkthrough with Tyler directly.
         </p>
@@ -356,6 +361,22 @@ const CommunityDashboard = () => (
         </a>
       </div>
     </motion.div>
+
+    {/* Locked courses teaser */}
+    <div>
+      <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-foreground">Courses</p>
+      <p className="mb-6 text-sm text-muted-foreground">
+        Courses are a Premium feature.{" "}
+        <Link to="/shipyard" className="underline underline-offset-2 transition-colors hover:text-foreground">
+          Upgrade to get first access.
+        </Link>
+      </p>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {COURSES.map((course, i) => (
+          <CourseCard key={course.id} course={course} index={i} locked={true} />
+        ))}
+      </div>
+    </div>
 
     {/* Slack + Blog side by side */}
     <motion.div
@@ -416,21 +437,6 @@ const CommunityDashboard = () => (
       </div>
     </motion.div>
 
-    {/* Locked courses teaser */}
-    <div>
-      <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-foreground">Courses</p>
-      <p className="mb-6 text-sm text-muted-foreground">
-        Courses are a Premium feature.{" "}
-        <Link to="/shipyard" className="underline underline-offset-2 transition-colors hover:text-foreground">
-          Upgrade to get first access.
-        </Link>
-      </p>
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {COURSES.map((course, i) => (
-          <CourseCard key={course.id} course={course} index={i} locked={true} />
-        ))}
-      </div>
-    </div>
   </div>
 );
 

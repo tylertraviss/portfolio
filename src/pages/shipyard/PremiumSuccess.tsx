@@ -79,12 +79,6 @@ const PremiumSuccess = () => {
             >
               Back to Shipyard
             </Link>
-            <Link
-              to="/"
-              className="text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Back to Portfolio
-            </Link>
           </motion.div>
         </div>
       </section>

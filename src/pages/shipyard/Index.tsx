@@ -106,7 +106,7 @@ const MemberLoginModal = ({ onClose }: { onClose: () => void }) => {
     const { data, error: dbError } = await supabase
       .from("email_gate_submissions")
       .select("id")
-      .eq("email", email.trim().toLowerCase())
+      .ilike("email", email.trim())
       .maybeSingle();
     setLoading(false);
     if (dbError || !data) {

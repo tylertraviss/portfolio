@@ -249,7 +249,7 @@ const Shipyard = () => {
             </a>
             <button
               onClick={() => setMemberModalOpen(true)}
-              className="text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+              className="rounded-full border border-border px-8 py-3 text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
             >
               Log in
             </button>

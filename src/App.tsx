@@ -13,6 +13,7 @@ import Premium from "./pages/shipyard/Premium";
 import CommunitySuccess from "./pages/shipyard/CommunitySuccess";
 import PremiumSuccess from "./pages/shipyard/PremiumSuccess";
 import Dashboard from "./pages/shipyard/Dashboard";
+import LinkedInPromo from "./pages/shipyard/LinkedInPromo";
 import EmailGate from "@/components/EmailGate";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/shipyard/community/success" element={<CommunitySuccess />} />
           <Route path="/shipyard/premium/success" element={<PremiumSuccess />} />
           <Route path="/shipyard/dashboard" element={<Dashboard />} />
+          <Route path="/shipyard/linkedin-promo" element={<LinkedInPromo />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

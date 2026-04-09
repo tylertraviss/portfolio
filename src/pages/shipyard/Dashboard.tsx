@@ -18,9 +18,9 @@ const BLOG_POSTS = [
     internal: true,
   },
   {
-    title: "How Software Is Actually Built",
-    sub: "From idea to scalable system — what nobody teaches you in tutorials.",
-    href: "/how-software-is-actually-built",
+    title: "Rebuilding LinkedIn with Claude",
+    sub: "A first-person account of rebuilding LinkedIn from scratch using Claude as co-pilot.",
+    href: "/rebuilding-linkedin-with-claude",
     internal: true,
   },
 ];

@@ -14,7 +14,7 @@ import CommunitySuccess from "./pages/shipyard/CommunitySuccess";
 import PremiumSuccess from "./pages/shipyard/PremiumSuccess";
 import Dashboard from "./pages/shipyard/Dashboard";
 import LinkedInPromo from "./pages/shipyard/LinkedInPromo";
-import HowSoftwareIsActuallyBuilt from "./pages/HowSoftwareIsActuallyBuilt";
+import RebuildingLinkedInWithClaude from "./pages/RebuildingLinkedInWithClaude";
 import EmailGate from "@/components/EmailGate";
 
 const queryClient = new QueryClient();
@@ -41,7 +41,7 @@ const App = () => (
           <Route path="/shipyard/premium/success" element={<PremiumSuccess />} />
           <Route path="/shipyard/dashboard" element={<Dashboard />} />
           <Route path="/shipyard/linkedin-promo" element={<LinkedInPromo />} />
-          <Route path="/how-software-is-actually-built" element={<GatedRoute element={<HowSoftwareIsActuallyBuilt />} />} />
+          <Route path="/rebuilding-linkedin-with-claude" element={<GatedRoute element={<RebuildingLinkedInWithClaude />} />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

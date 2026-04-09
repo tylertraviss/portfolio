@@ -5,8 +5,16 @@ import { revealVariants, staggerContainer } from "@/hooks/useTextReveal";
 const experiences = [
   {
     title: "Software Engineer",
+    company: "SalesPatriot",
+    period: "Jan 2026 – Present",
+    bullets: [
+      "Building and scaling core product features for a sales enablement platform.",
+    ],
+  },
+  {
+    title: "Software Engineer",
     company: "Fintex Inc.",
-    period: "Mar 2025 – Present",
+    period: "Jan 2025 – Dec 2025",
     bullets: [
       "Guided discovery and delivery across three regulated financial services platforms (Tangerine, BMO, and Aviso), supporting products used by 2M+ active daily users and advisors across Canada.",
       "Oversaw and actively managed 2,000+ Jira artifacts, including user stories, bugs, test cases, and refinements, maintaining backlog integrity, traceability, and delivery readiness across multiple regulated workstreams.",
@@ -16,7 +24,7 @@ const experiences = [
   {
     title: "Software Engineer",
     company: "QA Consultants",
-    period: "May 2024 – Mar 2025",
+    period: "Jan 2024 – Dec 2024",
     bullets: [
       "Built automated regression testing frameworks using Selenium and Pytest for high-stakes applications in healthcare, fintech, and gaming, significantly reducing time-to-market for critical feature releases.",
       "Delivered end-to-end test coverage for Liquidity Software's financial platform, identifying critical defects pre-release and contributing to a measurable reduction in production incidents and MTTR.",

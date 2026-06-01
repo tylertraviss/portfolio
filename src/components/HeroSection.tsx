@@ -39,8 +39,7 @@ const HeroSection = () => {
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
               className="mt-8 max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg"
             >
-              Building reliable, scalable systems across fintech, healthcare, and AI.
-              Turning complexity into software teams can confidently ship.
+              You need software that works under pressure. I build it — from banking apps serving <strong>2M+ users</strong> to AI platforms processing <strong>$200M</strong> in government contracts.
             </motion.p>
 
             <motion.div

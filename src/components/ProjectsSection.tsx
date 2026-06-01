@@ -9,8 +9,22 @@ const projects = [
     subtitle: "Concert Ticket Platform",
     description: "A concert ticket selling platform that uses Spotify API to reward biggest fans by giving them tickets first. Full-stack app with Go backend and Angular frontend, deployed on Railway.",
     tags: ["Go", "Angular", "Spotify API", "PostgreSQL", "Railway"],
-    website: "https://loyaltytickets.ca/",
     youtube: "https://youtu.be/SZpT_vyZsFw?si=XNlv3K6Zdf1GB5_C",
+  },
+  {
+    title: "J&P Kitchen & Bath",
+    subtitle: "Renovation & Design Studio",
+    description: "Website for a Scarborough-based renovation studio serving the GTA, featuring a curated intake form to capture client design vision and drive insights for custom kitchen, bath, and living space projects.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "UX"],
+    website: "https://jandpkitchens.com/",
+  },
+  {
+    title: "Gen Z Banking App",
+    subtitle: "Full-Stack Mobile Banking",
+    description: "Full-stack banking app built using Claude Code, Gemini, and Google Stitch — demonstrating AI-assisted development across a complete mobile banking experience.",
+    tags: ["TypeScript", "React Native", "Claude Code", "Gemini", "Google Stitch"],
+    github: "https://github.com/tylertraviss/gen-z-banking-app",
+    youtube: "https://www.youtube.com/watch?v=WpC8qQv3zo8",
   },
   {
     title: "Regression Testing Framework",

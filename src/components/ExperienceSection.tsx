@@ -1,23 +1,37 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { revealVariants, staggerContainer } from "@/hooks/useTextReveal";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import tangerineVideo from "@/assets/tangerine-project.mp4";
 
-const experiences = [
+type Experience = {
+  title: string;
+  company: string;
+  period: string;
+  location: string;
+  bullets: React.ReactNode[];
+  video?: string;
+};
+
+const experiences: Experience[] = [
   {
     title: "Software Engineer",
     company: "SalesPatriot",
     period: "Jan 2026 – Present",
+    location: "San Francisco, CA",
     bullets: [
-      "Building and scaling core product features for a sales enablement platform.",
+      <span>Engineering the core platform at SalesPatriot — an AI-powered OS for defense and aerospace suppliers that automates procurement workflows from RFQ discovery to proposal submission, supporting <strong className="text-foreground">$200M+</strong> in Pentagon orders processed through the platform.</span>,
+      <span>Engineered procurement automation workflows — including proposal generation, compliance checks, and pricing recommendations — enabling clients to process government contracts up to <strong className="text-foreground">7× faster</strong>.</span>,
+      <span>Developed integrations unifying fragmented systems (ERP, CRM, email, spreadsheets) into a centralized AI-native hub, driving <strong className="text-foreground">3.3× more supplier emails</strong> per day and <strong className="text-foreground">2.3× more vendor quotes</strong> per week.</span>,
     ],
   },
   {
     title: "Software Engineer",
     company: "Fintex Inc.",
     period: "Jan 2025 – Dec 2025",
+    location: "Toronto, ON",
+    video: tangerineVideo,
     bullets: [
-      "Guided discovery and delivery across three regulated financial services platforms (Tangerine, BMO, and Aviso), supporting products used by 2M+ active daily users and advisors across Canada.",
-      "Oversaw and actively managed 2,000+ Jira artifacts, including user stories, bugs, test cases, and refinements, maintaining backlog integrity, traceability, and delivery readiness across multiple regulated workstreams.",
+      <span>Guided delivery on the Tangerine Mobile Banking app (<a href="https://apps.apple.com/ca/app/tangerine-mobile-banking/id847844097" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground transition-colors">iOS</a> / <a href="https://play.google.com/store/apps/details?id=ca.tangerine.clients.banking.app&hl=en_CA" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground transition-colors">Android</a>), a top-rated Canadian banking app serving <strong className="text-foreground">2M+ active daily users</strong>.</span>,
+      <span>Oversaw and actively managed <strong className="text-foreground">2,000+ Jira artifacts</strong>, including user stories, bugs, test cases, and refinements, maintaining backlog integrity, traceability, and delivery readiness across multiple regulated workstreams.</span>,
       "Transformed ambiguous, high-level ideas into clear, quantifiable user stories by asking the right discovery questions, defining negative and edge cases, and establishing explicit acceptance criteria.",
     ],
   },
@@ -25,6 +39,7 @@ const experiences = [
     title: "Software Engineer",
     company: "QA Consultants",
     period: "Jan 2024 – Dec 2024",
+    location: "Toronto, ON",
     bullets: [
       "Built automated regression testing frameworks using Selenium and Pytest for high-stakes applications in healthcare, fintech, and gaming, significantly reducing time-to-market for critical feature releases.",
       "Delivered end-to-end test coverage for Liquidity Software's financial platform, identifying critical defects pre-release and contributing to a measurable reduction in production incidents and MTTR.",
@@ -36,123 +51,183 @@ const experiences = [
     title: "Software Engineer Intern",
     company: "TD Bank",
     period: "Apr 2023 – Aug 2023",
+    location: "Moncton, NB",
     bullets: [
-      "Created an Agile sprint monitoring tool for the DaaS platform, used by 12+ teams to manage scope.",
-      "Co-founded the TD AI Club, hosting monthly AI events that attracted 100+ members and built a community.",
+      <span>Created an Agile sprint monitoring tool for the DaaS platform, used by <strong className="text-foreground">12+ teams</strong> to manage scope.</span>,
+      <span>Co-founded the TD AI Club, hosting monthly AI events that attracted <strong className="text-foreground">100+ members</strong> and built a community.</span>,
     ],
   },
   {
     title: "Software Engineer Intern",
     company: "Breathe Biomedical",
     period: "May 2021 – Aug 2022",
+    location: "Moncton, NB",
     bullets: [
-      "Established an organizational benchmark CNN model for machine learning prediction on lung cancer at 85% accuracy.",
-      "Migrated 50% of system software from LabVIEW to C++, refactoring control logic for actuators, relays, and controllers into a high-performance framework.",
+      <span>Established an organizational benchmark CNN model for machine learning prediction on lung cancer at <strong className="text-foreground">85% accuracy</strong>.</span>,
+      <span>Migrated <strong className="text-foreground">50%</strong> of system software from LabVIEW to C++, refactoring control logic for actuators, relays, and controllers into a high-performance framework.</span>,
     ],
   },
 ];
 
-const ExperienceSection = () => {
-  const [active, setActive] = useState(0);
+type EntryProps = {
+  exp: Experience;
+  index: number;
+  onInView: (i: number) => void;
+};
+
+const ExperienceEntry = ({ exp, index, onInView }: EntryProps) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { margin: "-35% 0px -35% 0px" });
+
+  useEffect(() => {
+    if (inView) onInView(index);
+  }, [inView, index, onInView]);
 
   return (
-    <section className="section-padding border-t border-border" id="experience">
+    <div ref={ref} className="flex min-h-screen items-center py-24">
       <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-        className="mx-auto max-w-5xl"
+        initial={{ opacity: 0, y: 32 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0.3, y: 32 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className={`w-full ${exp.video ? "grid gap-10 md:grid-cols-[1fr_auto]" : ""}`}
       >
-        <motion.p
-          variants={revealVariants}
-          custom={0}
-          className="mb-16 text-xs font-medium uppercase tracking-widest text-muted-foreground"
-        >
-          Experience
-        </motion.p>
-
-        <motion.div
-          variants={revealVariants}
-          custom={0.1}
-          className="grid gap-12 md:grid-cols-[200px_1fr] md:gap-16"
-        >
-          {/* Left: company selector */}
-          <div className="flex flex-row gap-4 overflow-x-auto md:flex-col md:gap-0 md:overflow-visible">
-            {experiences.map((exp, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                className="group relative flex-shrink-0 py-4 text-left md:border-t md:border-border"
+        <div>
+          <p className="mb-3 text-xs uppercase tracking-widest text-muted-foreground">
+            {exp.period} · {exp.location}
+          </p>
+          <h3 className="mb-2 text-5xl font-black tracking-tight text-foreground md:text-6xl lg:text-7xl">
+            {exp.company}
+          </h3>
+          <p className="mb-10 text-sm text-muted-foreground">{exp.title}</p>
+          <ul className="max-w-xl space-y-4">
+            {exp.bullets.map((b, j) => (
+              <motion.li
+                key={j}
+                initial={{ opacity: 0, x: 16 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.15 + j * 0.08 }}
+                className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
               >
-                {/* Active indicator */}
-                <span
-                  className={`absolute left-0 top-0 hidden h-full w-px bg-foreground transition-opacity md:block ${
-                    active === i ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-                <span
-                  className={`absolute bottom-0 left-0 h-px w-full bg-foreground transition-opacity md:hidden ${
-                    active === i ? "opacity-100" : "opacity-0"
-                  }`}
-                />
+                <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-muted-foreground/40" />
+                {b}
+              </motion.li>
+            ))}
+          </ul>
+        </div>
 
-                <p
-                  className={`pl-0 text-sm font-medium transition-colors md:pl-4 ${
-                    active === i
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {exp.company}
-                </p>
-                <p className={`pl-0 text-xs transition-colors md:pl-4 ${
-                  active === i ? "text-muted-foreground" : "text-muted-foreground/40"
-                }`}>
-                  {exp.period}
-                </p>
-              </button>
+        {exp.video && (
+          <div className="flex items-center justify-end">
+            <motion.video
+              src={exp.video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="w-40 rounded-2xl border border-border shadow-lg lg:w-52"
+            />
+          </div>
+        )}
+      </motion.div>
+    </div>
+  );
+};
+
+const ExperienceSection = () => {
+  const [active, setActive] = useState(0);
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  const lineScaleY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  const handleInView = useCallback((i: number) => setActive(i), []);
+
+  return (
+    <section ref={sectionRef} className="border-t border-border" id="experience">
+      <div className="mx-auto max-w-5xl px-6 md:px-12 lg:px-0">
+        <div className="md:grid md:grid-cols-[220px_1fr] md:gap-16">
+
+          {/* Left: sticky timeline */}
+          <div className="hidden md:block">
+            <div className="sticky top-0 flex h-screen flex-col justify-center">
+              <p className="mb-10 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+                Experience
+              </p>
+              <div className="relative">
+                {/* Track line */}
+                <div className="absolute left-[5px] top-0 h-full w-px bg-border" />
+                {/* Progress line */}
+                <motion.div
+                  className="absolute left-[5px] top-0 w-px bg-foreground"
+                  style={{ height: lineScaleY, transformOrigin: "top" }}
+                />
+                <div className="space-y-7">
+                  {experiences.map((exp, i) => (
+                    <div key={i} className="flex items-start gap-4">
+                      <div
+                        className={`relative z-10 flex-shrink-0 rounded-full border-2 transition-all duration-500 ${
+                          i === active
+                            ? "mt-[3px] h-3 w-3 border-foreground bg-foreground"
+                            : i < active
+                            ? "mt-[4px] h-[9px] w-[9px] border-foreground bg-foreground"
+                            : "mt-[4px] h-[9px] w-[9px] border-border bg-background"
+                        }`}
+                      />
+                      <div className="space-y-0.5">
+                        <p className={`leading-tight font-semibold transition-all duration-300 ${
+                          i === active
+                            ? "text-base text-foreground"
+                            : "text-xs text-muted-foreground"
+                        }`}>
+                          {exp.company}
+                        </p>
+                        <p className={`transition-all duration-300 ${
+                          i === active ? "text-xs text-muted-foreground" : "text-[10px] text-muted-foreground/60"
+                        }`}>
+                          {exp.period}
+                        </p>
+                        <p className={`transition-all duration-300 ${
+                          i === active ? "text-xs text-muted-foreground/70" : "text-[10px] text-muted-foreground/50"
+                        }`}>
+                          {exp.title}
+                        </p>
+                        <p className={`transition-all duration-300 ${
+                          i === active ? "text-xs text-muted-foreground/60" : "text-[10px] text-muted-foreground/50"
+                        }`}>
+                          {exp.location}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile: section label */}
+          <p className="pb-12 pt-16 text-xs font-medium uppercase tracking-widest text-muted-foreground md:hidden">
+            Experience
+          </p>
+
+          {/* Right: scrolling entries */}
+          <div>
+            {experiences.map((exp, i) => (
+              <ExperienceEntry
+                key={i}
+                exp={exp}
+                index={i}
+                onInView={handleInView}
+              />
             ))}
           </div>
-
-          {/* Right: detail panel */}
-          <div className="relative min-h-[200px]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <p className="mb-1 text-xs uppercase tracking-widest text-muted-foreground">
-                  {experiences[active].period}
-                </p>
-                <h3 className="mb-1 text-3xl font-black tracking-tight text-foreground md:text-4xl">
-                  {experiences[active].company}
-                </h3>
-                <p className="mb-8 text-sm text-muted-foreground">
-                  {experiences[active].title}
-                </p>
-                <ul className="space-y-3">
-                  {experiences[active].bullets.map((b, j) => (
-                    <motion.li
-                      key={j}
-                      initial={{ opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: j * 0.07 }}
-                      className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
-                    >
-                      <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-muted-foreground/40" />
-                      {b}
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 };

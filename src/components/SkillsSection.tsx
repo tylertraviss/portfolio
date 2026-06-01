@@ -26,7 +26,7 @@ const SkillsSection = () => {
           Skills
         </motion.p>
 
-        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {skillGroups.map((group, i) => (
             <motion.div key={group.label} variants={revealVariants} custom={i * 0.1}>
               <p className="mb-3 text-xs font-medium uppercase tracking-widest text-muted-foreground/50">

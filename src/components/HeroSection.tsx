@@ -46,25 +46,27 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.7 }}
-              className="mt-10 flex items-center gap-8"
+              className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-8"
             >
-              <a
-                href="#experience"
-                className="group relative inline-flex items-center gap-3 text-sm font-medium uppercase tracking-widest text-foreground transition-colors"
-              >
-                <span className="relative z-10 px-4 py-2.5">View Work</span>
-                <span className="absolute inset-0 scale-90 rounded-sm border border-foreground opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100" />
-              </a>
-              <a
-                href="#contact"
-                className="group relative inline-flex items-center gap-3 text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
-              >
-                <span className="relative z-10 px-4 py-2.5">Get in Touch</span>
-                <span className="absolute inset-0 scale-90 rounded-sm border border-border opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 group-hover:border-foreground" />
-              </a>
+              <div className="flex items-center gap-6">
+                <a
+                  href="#experience"
+                  className="group relative inline-flex items-center gap-3 text-sm font-medium uppercase tracking-widest text-foreground transition-colors"
+                >
+                  <span className="relative z-10 px-4 py-2.5">View Work</span>
+                  <span className="absolute inset-0 scale-90 rounded-sm border border-foreground opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100" />
+                </a>
+                <a
+                  href="#contact"
+                  className="group relative inline-flex items-center gap-3 text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <span className="relative z-10 px-4 py-2.5">Get in Touch</span>
+                  <span className="absolute inset-0 scale-90 rounded-sm border border-border opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 group-hover:border-foreground" />
+                </a>
+              </div>
               <Link
                 to="/shipyard"
-                className="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-90"
+                className="w-fit rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-90"
                 style={{ background: "hsl(var(--purple))" }}
               >
                 Join Community

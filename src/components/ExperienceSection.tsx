@@ -84,7 +84,7 @@ const ExperienceEntry = ({ exp, index, onInView }: EntryProps) => {
   }, [inView, index, onInView]);
 
   return (
-    <div ref={ref} className="flex min-h-screen items-center py-24">
+    <div ref={ref} className="flex min-h-screen items-center py-16 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 32 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0.3, y: 32 }}
@@ -95,7 +95,7 @@ const ExperienceEntry = ({ exp, index, onInView }: EntryProps) => {
           <p className="mb-3 text-xs uppercase tracking-widest text-muted-foreground">
             {exp.period} · {exp.location}
           </p>
-          <h3 className="mb-2 text-5xl font-black tracking-tight text-foreground md:text-6xl lg:text-7xl">
+          <h3 className="mb-2 text-3xl font-black tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
             {exp.company}
           </h3>
           <p className="mb-10 text-sm text-muted-foreground">{exp.title}</p>
@@ -116,7 +116,7 @@ const ExperienceEntry = ({ exp, index, onInView }: EntryProps) => {
         </div>
 
         {exp.video && (
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-center md:justify-end">
             <motion.video
               src={exp.video}
               autoPlay

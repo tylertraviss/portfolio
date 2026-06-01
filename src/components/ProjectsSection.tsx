@@ -213,7 +213,7 @@ const ProjectsSection = () => {
                     {p.subtitle}
                   </p>
                 </div>
-                <p className="mt-0.5 text-xs text-muted-foreground/50">
+                <p className="mt-0.5 hidden text-xs text-muted-foreground/50 sm:block">
                   {p.tags.join(" · ")}
                 </p>
               </div>

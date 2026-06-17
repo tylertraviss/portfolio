@@ -28,9 +28,9 @@ const HeroSection = () => {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
               className="text-[clamp(3rem,10vw,8rem)] font-black leading-[0.95] tracking-tighter text-foreground"
             >
-              Tyler
+              Ethan
               <br />
-              Travis.
+              Court.
             </motion.h1>
 
             <motion.p

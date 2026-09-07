@@ -15,7 +15,7 @@ type Experience = {
 const experiences: Experience[] = [
   {
     title: "Founder",
-    company: "HiredQuick",
+    company: "hiredquick.org",
     companyUrl: "https://www.hiredquick.org/",
     period: "Aug 2026 – Present",
     location: "San Francisco, CA",

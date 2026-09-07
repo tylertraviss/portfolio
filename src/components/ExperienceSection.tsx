@@ -29,7 +29,7 @@ const experiences: Experience[] = [
     title: "Senior Software Engineer",
     company: "Member365",
     companyUrl: "https://member365.com/",
-    period: "Jul 2026 – Aug 2026",
+    period: "Jul 2026 – Present",
     location: "San Francisco, CA",
     bullets: [
       <span>Built and maintained a scalable regression testing framework that safeguarded releases for a multi-tenant SaaS platform serving <strong className="text-foreground">400+ member organizations</strong> and <strong className="text-foreground">2M+ end users</strong>.</span>,

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
 import { track } from "@vercel/analytics/react";
 import { Menu, X } from "lucide-react";
 
@@ -51,14 +50,14 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
-          <Link
-            to="/shipyard"
+          <a
+            href="#contact"
             className="rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-90"
             style={{ background: "hsl(var(--purple))" }}
-            onClick={() => track("nav_click", { label: "Join" })}
+            onClick={() => track("nav_click", { label: "Get in touch" })}
           >
-            Join Community
-          </Link>
+            Get in touch
+          </a>
         </div>
 
         {/* Mobile hamburger */}
@@ -92,14 +91,14 @@ const Navbar = () => {
                   {l.label}
                 </a>
               ))}
-              <Link
-                to="/shipyard"
+              <a
+                href="#contact"
                 className="inline-flex w-fit rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-90"
                 style={{ background: "hsl(var(--purple))" }}
-                onClick={() => { setMenuOpen(false); track("nav_click", { label: "Join" }); }}
+                onClick={() => { setMenuOpen(false); track("nav_click", { label: "Get in touch" }); }}
               >
-                Join Community
-              </Link>
+                Get in touch
+              </a>
             </div>
           </motion.div>
         )}

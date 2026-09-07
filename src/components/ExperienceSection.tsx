@@ -14,10 +14,22 @@ type Experience = {
 
 const experiences: Experience[] = [
   {
+    title: "Founder",
+    company: "HiredQuick",
+    companyUrl: "https://www.hiredquick.org/",
+    period: "Aug 2026 – Present",
+    location: "San Francisco, CA",
+    bullets: [
+      <span>Founded <strong className="text-foreground">HiredQuick</strong>, a platform that helps candidates land startup roles by researching a company's unsolved problems and guiding them to ship a tailored portfolio project before they apply.</span>,
+      <span>Built the research pipeline that mines job posts, engineering blogs, GitHub, and founder interviews across <strong className="text-foreground">2,200+ startups</strong> and <strong className="text-foreground">5,700+ open roles</strong> to surface concrete product gaps.</span>,
+      <span>Shipped an AI-assisted build flow with code review, auto-generated pitch pages with live demos, personalized founder outreach, and a visual pipeline board tracking companies from research to conversation.</span>,
+    ],
+  },
+  {
     title: "Senior Software Engineer",
     company: "Member365",
     companyUrl: "https://member365.com/",
-    period: "Jul 2026 – Present",
+    period: "Jul 2026 – Aug 2026",
     location: "San Francisco, CA",
     bullets: [
       <span>Built and maintained a scalable regression testing framework that safeguarded releases for a multi-tenant SaaS platform serving <strong className="text-foreground">400+ member organizations</strong> and <strong className="text-foreground">2M+ end users</strong>.</span>,

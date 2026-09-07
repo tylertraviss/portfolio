@@ -5,6 +5,7 @@ import tangerineVideo from "@/assets/tangerine-project.mp4";
 type Experience = {
   title: string;
   company: string;
+  companyUrl?: string;
   period: string;
   location: string;
   bullets: React.ReactNode[];
@@ -13,9 +14,21 @@ type Experience = {
 
 const experiences: Experience[] = [
   {
+    title: "Senior Software Engineer",
+    company: "Member365",
+    companyUrl: "https://member365.com/",
+    period: "Jul 2026 – Present",
+    location: "San Francisco, CA",
+    bullets: [
+      <span>Built and maintained a scalable regression testing framework that safeguarded releases for a multi-tenant SaaS platform serving <strong className="text-foreground">400+ member organizations</strong> and <strong className="text-foreground">2M+ end users</strong>.</span>,
+      <span>Designed and deployed AI-powered parallel support agents for Zendesk, automating ticket triage and resolution workflows to save <strong className="text-foreground">25+ engineering hours per week</strong>.</span>,
+      <span>Integrated the regression suite into CI/CD pipelines as automated release gates, expanding end-to-end coverage across billing, events, and membership workflows to catch defects before production.</span>,
+    ],
+  },
+  {
     title: "Software Engineer",
     company: "SalesPatriot",
-    period: "Jan 2026 – Present",
+    period: "Jan 2026 – Jul 2026",
     location: "San Francisco, CA",
     bullets: [
       <span>Engineering the core platform at SalesPatriot — an AI-powered OS for defense and aerospace suppliers that automates procurement workflows from RFQ discovery to proposal submission, supporting <strong className="text-foreground">$200M+</strong> in Pentagon orders processed through the platform.</span>,
@@ -96,7 +109,18 @@ const ExperienceEntry = ({ exp, index, onInView }: EntryProps) => {
             {exp.period} · {exp.location}
           </p>
           <h3 className="mb-2 text-3xl font-black tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-            {exp.company}
+            {exp.companyUrl ? (
+              <a
+                href={exp.companyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-muted-foreground"
+              >
+                {exp.company}
+              </a>
+            ) : (
+              exp.company
+            )}
           </h3>
           <p className="mb-10 text-sm text-muted-foreground">{exp.title}</p>
           <ul className="max-w-xl space-y-4">
